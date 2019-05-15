@@ -395,6 +395,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"../../node_modules/react-native-webrtc/ios",
+					"$(PROJECT_DIR)/src",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -431,6 +432,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"../../node_modules/react-native-webrtc/ios",
+					"$(PROJECT_DIR)/src",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

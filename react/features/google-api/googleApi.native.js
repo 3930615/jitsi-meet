@@ -1,8 +1,8 @@
 // @flow
 
-import {
-    GoogleSignin
-} from 'react-native-google-signin';
+// import {
+//     GoogleSignin
+// } from 'react-native-google-signin';
 
 import {
     API_URL_BROADCAST_STREAMS,
@@ -26,7 +26,7 @@ class GoogleApi {
      * @returns {void}
      */
     configure(config: Object) {
-        GoogleSignin.configure(config);
+        // GoogleSignin.configure(config);
     }
 
     /**
@@ -58,7 +58,7 @@ class GoogleApi {
      * @returns {Promise<*>}
      */
     hasPlayServices() {
-        return GoogleSignin.hasPlayServices();
+        // return GoogleSignin.hasPlayServices();
     }
 
     /**
@@ -67,7 +67,7 @@ class GoogleApi {
      * @returns {Promise<*>}
      */
     signIn() {
-        return GoogleSignin.signIn();
+        // return GoogleSignin.signIn();
     }
 
     /**
@@ -76,7 +76,7 @@ class GoogleApi {
      * @returns {Promise<*>}
      */
     signInSilently() {
-        return GoogleSignin.signInSilently();
+        // return GoogleSignin.signInSilently();
     }
 
     /**
@@ -85,7 +85,7 @@ class GoogleApi {
      * @returns {Promise<*>}
      */
     signOut() {
-        return GoogleSignin.signOut();
+        // return GoogleSignin.signOut();
     }
 
     /**

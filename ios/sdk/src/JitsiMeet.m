@@ -23,7 +23,7 @@
 #import "RCTBridgeWrapper.h"
 #import "ReactUtils.h"
 
-#import <RNGoogleSignin/RNGoogleSignin.h>
+//#import <RNGoogleSignin/RNGoogleSignin.h>
 
 
 @implementation JitsiMeet {
@@ -85,12 +85,12 @@
         return YES;
     }
 
-    if ([RNGoogleSignin application:app
-                            openURL:url
-                  sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
-                         annotation:options[UIApplicationOpenURLOptionsAnnotationKey]]) {
-        return YES;
-    }
+//    if ([RNGoogleSignin application:app
+//                            openURL:url
+//                  sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+//                         annotation:options[UIApplicationOpenURLOptionsAnnotationKey]]) {
+//        return YES;
+//    }
 
     if (_customUrlScheme == nil || ![_customUrlScheme isEqualToString:url.scheme]) {
         return NO;

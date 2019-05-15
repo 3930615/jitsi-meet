@@ -21,9 +21,10 @@
 
 @import Crashlytics;
 @import Fabric;
-@import Firebase;
+//@import Firebase;
 @import JitsiMeet;
-
+#import <FirebaseCore.h>
+#import <FirebaseDynamicLinks.h>
 
 @implementation AppDelegate
 

@@ -1,3 +1,5 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
 platform :ios, '10.0'
 
 workspace 'jitsi-meet'
@@ -7,8 +9,16 @@ target 'jitsi-meet' do
 
   pod 'Crashlytics', '~> 3.12.0'
   pod 'Fabric', '~> 1.9.0'
-  pod 'Firebase/Core', '~> 5.18.0'
-  pod 'Firebase/DynamicLinks', '~> 5.18.0'
+  #pod 'Firebase/Core', '~> 5.18.0'
+  #pod 'Firebase/DynamicLinks', '~> 5.18.0'
+
+  #pod 'Firebase', '~> 5.18.0'
+  pod 'FirebaseCore', :path => '/Users/haoqi/Downloads/firebase-ios-sdk-5.19.0'
+  pod 'GoogleUtilities', :path => '/Users/haoqi/Downloads/firebase-ios-sdk-5.19.0'
+  #pod 'FirebaseAnalytics', :path => '/Users/haoqi/Downloads/FirebaseAnalytics-6.0.0'
+
+  pod 'FirebaseDynamicLinks', :path => '/Users/haoqi/Downloads/firebase-ios-sdk-5.19.0'
+
 end
 
 target 'JitsiMeet' do
@@ -47,8 +57,6 @@ target 'JitsiMeet' do
   pod 'BVLinearGradient',
     :path => '../node_modules/react-native-linear-gradient'
   pod 'react-native-webrtc', :path => '../node_modules/react-native-webrtc'
-  pod 'RNGoogleSignin',
-    :path => '../node_modules/react-native-google-signin'
   pod 'RNSound', :path => '../node_modules/react-native-sound'
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
   pod 'react-native-calendar-events',
