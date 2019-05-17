@@ -49,7 +49,8 @@ import {
     AVATAR_ID_COMMAND,
     AVATAR_URL_COMMAND,
     EMAIL_COMMAND,
-    JITSI_CONFERENCE_URL_KEY
+    JITSI_CONFERENCE_URL_KEY,
+    USERID_COMMAND
 } from './constants';
 import {
     _addLocalTracksToConference,
@@ -189,6 +190,13 @@ function _addConferenceListeners(conference, dispatch) {
             conference,
             id,
             email: data.value
+        })));
+    conference.addCommandListener(
+        USERID_COMMAND,
+        (data, id) => dispatch(participantUpdated({
+            conference,
+            id,
+            userId: data.value
         })));
 }
 
@@ -354,6 +362,9 @@ export function conferenceWillLeave(conference: Object) {
  * Initializes a new conference.
  *
  * @returns {Function}
+ *
+ * @todo 在此处添加参数值
+ *
  */
 export function createConference() {
     return (dispatch: Function, getState: Function) => {

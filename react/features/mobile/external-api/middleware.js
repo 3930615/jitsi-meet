@@ -30,6 +30,8 @@ import {
     PARTICIPANT_LEFT
 } from '../../base/participants';
 
+// declare var APP: Object;
+
 /**
  * Event which will be emitted on the native side to indicate the conference
  * has ended either by user request or because an error was produced.
@@ -48,13 +50,24 @@ MiddlewareRegistry.register(store => next => action => {
     const { type } = action;
 
     switch (type) {
-    case PARTICIPANT_LEFT:
-        const { tempType, participant } = action;
-        sendEvent(store, type, { id: participant.id });
+    case PARTICIPANT_LEFT: {
+        // const memsCount = APP.conference.membersCount;
+        // alert(memsCount);
+        // const { participant } = action;
+        // sendEvent(store, type, {});
         break;
-    case PARTICIPANT_JOINED:
-        sendEvent(store, type, action);
+    }
+    case PARTICIPANT_JOINED: {
+        // alert('joined');
+        //
+        // const { participant } = action;
+        // if (!participant.local) {
+        //     // const memsCount = APP.conference.membersCount;
+        //     // alert(memsCount);
+        //     sendEvent(store, type, {});
+        // }
         break;
+    }
     case HIDDEN_PARTICIPANT_JOINED:
     case HIDDEN_PARTICIPANT_LEFT:
     case PARTICIPANT_UPDATED:

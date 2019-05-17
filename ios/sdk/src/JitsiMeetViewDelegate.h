@@ -55,4 +55,10 @@
  */
 - (void)enterPictureInPicture:(NSDictionary *)data;
 
+- (void)enterInvite:(NSDictionary *)user;
+
+- (void)participantJoined:(NSDictionary *)data;
+
+- (void)participantLeft:(NSDictionary *)data;
+
 @end

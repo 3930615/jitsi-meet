@@ -375,7 +375,9 @@ export function participantUpdated(participant = {}) {
     if (participant.name) {
         participantToUpdate.name = getNormalizedDisplayName(participant.name);
     }
-
+    if (participant.userId) {
+        participantToUpdate.userId = participant.userId;
+    }
     return {
         type: PARTICIPANT_UPDATED,
         participant: participantToUpdate
