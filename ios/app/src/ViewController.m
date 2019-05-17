@@ -99,5 +99,8 @@
 //- (void)enterPictureInPicture:(NSDictionary *)data {
 //  [self _onJitsiMeetViewDelegateEvent:@"CONFERENCE_WILL_JOIN" withData:data];
 //}
+- (void)enterInvite:(NSDictionary *)user {
+    NSLog(@"enter invite");
+}
 
 @end

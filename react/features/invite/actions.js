@@ -1,10 +1,14 @@
 // @flow
 
 import type { Dispatch } from 'redux';
+import { NativeModules } from 'react-native';
 
 import { getInviteURL } from '../base/connection';
 import { inviteVideoRooms } from '../videosipgw';
 import { getParticipants } from '../base/participants';
+
+import { getAppProp } from '../base/app';
+import { Platform } from '../base/react';
 
 import {
     ADD_PENDING_INVITE_REQUEST,
@@ -13,7 +17,8 @@ import {
     SET_CALLEE_INFO_VISIBLE,
     SET_INVITE_DIALOG_VISIBLE,
     UPDATE_DIAL_IN_NUMBERS_FAILED,
-    UPDATE_DIAL_IN_NUMBERS_SUCCESS
+    UPDATE_DIAL_IN_NUMBERS_SUCCESS,
+    ENTER_INVITE
 } from './actionTypes';
 import {
     getDialInConferenceID,
@@ -22,6 +27,9 @@ import {
 } from './functions';
 
 const logger = require('jitsi-meet-logger').getLogger(__filename);
+
+declare var APP: Object;
+
 
 /**
  * Creates a (redux) action to signal that a click/tap has been performed on
@@ -266,5 +274,41 @@ export function addPendingInviteRequest(
 export function removePendingInviteRequests() {
     return {
         type: REMOVE_PENDING_INVITE_REQUESTS
+    };
+}
+
+/**
+ * Enters (or rather initiates entering) picture-in-picture.
+ * Helper function to enter PiP mode. This is triggered by user request
+ * (either pressing the button in the toolbox or the home button on Android)
+ * ans this triggers the PiP mode, iff it's available and we are in a
+ * conference.
+ *
+ * @public
+ * @returns {Function}
+ */
+export function enterInvite() {
+    return (dispatch: Dispatch<any>, getState: Function) => {
+        // XXX At the time of this writing this action can only be dispatched by
+        // the button which is on the conference view, which means that it's
+        // fine to enter PiP mode.
+        if (getAppProp(getState, 'inviteEnabled')) {
+            alert('aaaa')
+            const { Invite } = NativeModules;
+            console.log('invite==>',Invite)
+            // const members = APP.conference.listMembersUserIds();
+            const members = [];
+            const p
+                = Platform.OS === 'android' || Platform.OS === 'ios'
+                ? Invite
+                    ? Invite.enterInvite({ members })
+                    : Promise.reject(
+                        new Error('invite not supported'))
+                : Promise.resolve();
+
+            p.then(
+                () => dispatch({ type: ENTER_INVITE }),
+                e => logger.warn(`Error entering invite mode: ${e}`));
+        }
     };
 }
