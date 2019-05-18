@@ -5,7 +5,7 @@ import { NativeModules } from 'react-native';
 
 import { getInviteURL } from '../base/connection';
 import { inviteVideoRooms } from '../videosipgw';
-import { getParticipants } from '../base/participants';
+import { getParticipants, getParticipantsUserInfo } from '../base/participants';
 
 import { getAppProp } from '../base/app';
 import { Platform } from '../base/react';
@@ -292,7 +292,9 @@ export function enterInvite() {
         // the button which is on the conference view, which means that it's
         // fine to enter PiP mode.
         if (getAppProp(getState, 'inviteEnabled')) {
-            const members = APP.conference.listMembersUserIds();
+            const members = getParticipantsUserInfo(getState);
+            console.log('members : ', members);
+            // const members = APP.conference.listMembersUserIds();
             sendEvent(getState, 'ENTER_INVITE', {members});
 
             // alert('aaaa')
