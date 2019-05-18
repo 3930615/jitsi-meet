@@ -239,9 +239,7 @@ class ParticipantView extends Component<Props> {
                         zoomEnabled = { this.props.zoomEnabled } /> }
 
                 { renderAvatar
-                    && <Avatar
-                        size = { this.props.avatarSize }
-                        uri = { avatar } /> }
+                    && this._renderPersonAvatar() }
 
                 { useTint
 
@@ -254,6 +252,36 @@ class ParticipantView extends Component<Props> {
                     && this._renderConnectionInfo(connectionStatus) }
             </Container>
         );
+    }
+    _renderPersonAvatar(){
+        const {
+            _avatar: avatar,
+            _participantName: displayName
+        } = this.props
+        const avatarWrapStyle = {
+            wrap: {
+                width: '100%',
+                height: 200,
+                backgroudColor: 'red',
+                alignItems: 'center',
+                flexDirection: 'column'
+            },
+            img: {},
+            txt: {
+                textAlign: 'center',
+                color: 'white',
+                height: 20,
+                width: '100%'
+            }
+        }
+        return(
+            <View style = { avatarWrapStyle.wrap } >
+                <Avatar
+                    size = { this.props.avatarSize }
+                    uri = { avatar } />
+                <Text style = { avatarWrapStyle.txt }>{displayName}</Text>
+            </View>
+        )
     }
 }
 

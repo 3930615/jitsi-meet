@@ -40,7 +40,6 @@ class DisplayNameLabel extends Component<Props> {
         if (!this.props._render) {
             return null;
         }
-
         return (
             <View style = { styles.displayNameBackdrop }>
                 <Text style = { styles.displayNameText }>

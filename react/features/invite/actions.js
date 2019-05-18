@@ -286,13 +286,13 @@ export function removePendingInviteRequests() {
  * @returns {Function}
  */
 export function enterInvite() {
+
     return (dispatch: Dispatch<any>, getState: Function) => {
         // XXX At the time of this writing this action can only be dispatched by
         // the button which is on the conference view, which means that it's
         // fine to enter PiP mode.
         if (getAppProp(getState, 'inviteEnabled')) {
             const members = APP.conference.listMembersUserIds();
-            alert('members');
             sendEvent(getState, 'ENTER_INVITE', {members});
 
             // alert('aaaa')
