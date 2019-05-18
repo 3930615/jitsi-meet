@@ -31,6 +31,11 @@
  */
 @property (nonatomic, copy, nullable) NSString *token;
 
+@property (nonatomic, copy, nullable) NSString *displayName;
+@property (nonatomic, copy, nullable) NSString *userId;
+@property (nonatomic, copy, nullable) NSString *avatarURL;
+
+
 /**
  * Color scheme override, see:
  * https://github.com/jitsi/jitsi-meet/blob/master/react/features/base/color-scheme/defaultScheme.js
@@ -58,6 +63,10 @@
 @property (nonatomic, copy, nullable, readonly) NSURL *serverURL;
 @property (nonatomic, copy, nullable, readonly) NSString *room;
 @property (nonatomic, copy, nullable, readonly) NSString *token;
+
+@property (nonatomic, copy, nullable) NSString *displayName;
+@property (nonatomic, copy, nullable) NSString *userId;
+@property (nonatomic, copy, nullable) NSString *avatarURL;
 
 @property (nonatomic, copy, nullable) NSDictionary *colorScheme;
 
