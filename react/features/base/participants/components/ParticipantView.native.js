@@ -256,12 +256,12 @@ class ParticipantView extends Component<Props> {
     _renderPersonAvatar(){
         const {
             _avatar: avatar,
-            _participantName: displayName
+            _participantName: displayName,
+            isSmall
         } = this.props
         const avatarWrapStyle = {
             wrap: {
                 width: '100%',
-                height: 200,
                 backgroudColor: 'red',
                 alignItems: 'center',
                 flexDirection: 'column'
@@ -270,7 +270,6 @@ class ParticipantView extends Component<Props> {
             txt: {
                 textAlign: 'center',
                 color: 'white',
-                height: 20,
                 width: '100%'
             }
         }
@@ -279,7 +278,7 @@ class ParticipantView extends Component<Props> {
                 <Avatar
                     size = { this.props.avatarSize }
                     uri = { avatar } />
-                <Text style = { avatarWrapStyle.txt }>{displayName}</Text>
+                <Text style = { avatarWrapStyle.txt }>{isSmall?'':displayName}</Text>
             </View>
         )
     }

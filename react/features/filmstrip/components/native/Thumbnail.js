@@ -156,6 +156,7 @@ class Thumbnail extends Component<Props> {
                             = { audioTrack.jitsiTrack.getOriginalStream() } /> }
 
                 <ParticipantView
+                    isSmall = { true }
                     avatarSize = { AVATAR_SIZE }
                     participantId = { participantId }
                     style = { _styles.participantViewStyle }
