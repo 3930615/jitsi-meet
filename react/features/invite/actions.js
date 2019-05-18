@@ -292,6 +292,7 @@ export function enterInvite() {
         // the button which is on the conference view, which means that it's
         // fine to enter PiP mode.
         if (getAppProp(getState, 'inviteEnabled')) {
+            console.log('getstate==>',this.props)
             const members = APP.conference.listMembersUserIds();
             sendEvent(getState, 'ENTER_INVITE', {members});
 
