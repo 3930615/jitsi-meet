@@ -91,9 +91,12 @@ export function getPropertyValue(
  * @param {Object|Function} stateful - The redux state object or
  * {@code getState} function.
  * @returns {string} - The currently configured server URL.
+ * @todo
+ *
  */
 export function getServerURL(stateful: Object | Function) {
     const state = toState(stateful);
-
-    return state['features/base/settings'].serverURL || DEFAULT_SERVER_URL;
+    var serverUrl = state['features/base/settings'].serverURL || DEFAULT_SERVER_URL;
+    // alert(serverUrl);
+    return serverUrl;
 }

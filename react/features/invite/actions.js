@@ -25,11 +25,9 @@ import {
     getDialInNumbers,
     invitePeopleAndChatRooms
 } from './functions';
+import { sendEvent } from '../mobile/external-api';
 
 const logger = require('jitsi-meet-logger').getLogger(__filename);
-
-declare var APP: Object;
-
 
 /**
  * Creates a (redux) action to signal that a click/tap has been performed on
@@ -293,22 +291,25 @@ export function enterInvite() {
         // the button which is on the conference view, which means that it's
         // fine to enter PiP mode.
         if (getAppProp(getState, 'inviteEnabled')) {
-            alert('aaaa')
-            const { Invite } = NativeModules;
-            console.log('invite==>',Invite)
-            // const members = APP.conference.listMembersUserIds();
-            const members = [];
-            const p
-                = Platform.OS === 'android' || Platform.OS === 'ios'
-                ? Invite
-                    ? Invite.enterInvite({ members })
-                    : Promise.reject(
-                        new Error('invite not supported'))
-                : Promise.resolve();
+            const members = APP.conference.listMembersUserIds();
+            alert('members');
+            sendEvent(getState, 'ENTER_INVITE', {members});
 
-            p.then(
-                () => dispatch({ type: ENTER_INVITE }),
-                e => logger.warn(`Error entering invite mode: ${e}`));
+            // alert('aaaa')
+            // const { Invite } = NativeModules;
+            // console.log('invite==>',Invite)
+            // const members = [];
+            // const p
+            //     = Platform.OS === 'android' || Platform.OS === 'ios'
+            //     ? Invite
+            //         ? Invite.enterInvite({ members })
+            //         : Promise.reject(
+            //             new Error('invite not supported'))
+            //     : Promise.resolve();
+            //
+            // p.then(
+            //     () => dispatch({ type: ENTER_INVITE }),
+            //     e => logger.warn(`Error entering invite mode: ${e}`));
         }
     };
 }

@@ -51,6 +51,7 @@ MiddlewareRegistry.register(store => next => action => {
 
     switch (type) {
     case PARTICIPANT_LEFT: {
+        // console.log('receive listener : ', type, action);
         // const memsCount = APP.conference.membersCount;
         // alert(memsCount);
         // const { participant } = action;
@@ -58,6 +59,7 @@ MiddlewareRegistry.register(store => next => action => {
         break;
     }
     case PARTICIPANT_JOINED: {
+        // console.log('receive listener : ', type, action);
         // alert('joined');
         //
         // const { participant } = action;
