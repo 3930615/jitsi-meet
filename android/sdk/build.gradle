@@ -33,10 +33,6 @@ dependencies {
     implementation(project(':react-native-fast-image')) {
         exclude group: 'com.android.support'
     }
-    implementation(project(":react-native-google-signin")) {
-        exclude group: 'com.google.android.gms'
-        exclude group: 'com.android.support'
-    }
     implementation project(':react-native-immersive')
     implementation project(':react-native-keep-awake')
     implementation project(':react-native-linear-gradient')

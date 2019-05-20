@@ -125,7 +125,6 @@
     "lint": "eslint . && flow",
     "validate": "npm ls"
   },
-
   "browser": {
     "jQuery-Impromptu": "jQuery-Impromptu/src/jquery-impromptu.js"
   }
