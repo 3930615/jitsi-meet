@@ -49,6 +49,7 @@ import {
     setDesktopSharingEnabled
 } from './react/features/base/conference';
 import {
+    checkAndNotifyForNewDevice,
     getAvailableDevices,
     setAudioOutputDeviceId,
     updateDeviceList
@@ -437,8 +438,8 @@ class ConferenceConnector {
                     hasRead: true,
                     error: code,
                     message: msg,
-                    timestamp: Date.now(),
-                    type: 'error'
+                    messageType: 'error',
+                    timestamp: Date.now()
                 }));
             }
             break;
@@ -717,13 +718,21 @@ export default {
         this.roomName = options.roomName;
 
         return (
-            this.createInitialLocalTracksAndConnect(
+
+            // Initialize the device list first. This way, when creating tracks
+            // based on preferred devices, loose label matching can be done in
+            // cases where the exact ID match is no longer available, such as
+            // when the camera device has switched USB ports.
+            this._initDeviceList()
+                .catch(error => logger.warn(
+                    'initial device list initialization failed', error))
+                .then(() => this.createInitialLocalTracksAndConnect(
                 options.roomName, {
                     startAudioOnly: config.startAudioOnly,
                     startScreenSharing: config.startScreenSharing,
                     startWithAudioMuted: config.startWithAudioMuted,
                     startWithVideoMuted: config.startWithVideoMuted
-                })
+                }))
             .then(([ tracks, con ]) => {
                 tracks.forEach(track => {
                     if ((track.isAudioTrack() && this.isLocalAudioMuted())
@@ -768,7 +777,10 @@ export default {
                     this.setVideoMuteStatus(true);
                 }
 
-                this._initDeviceList();
+                // Initialize device list a second time to ensure device labels
+                // get populated in case of an initial gUM acceptance; otherwise
+                // they may remain as empty strings.
+                this._initDeviceList(true);
 
                 if (config.iAmRecorder) {
                     this.recorder = new Recorder();
@@ -940,10 +952,6 @@ export default {
      */
     listMembersIds() {
         return room.getParticipants().map(p => p.getId());
-    },
-
-    listMembersUserIds() {
-        return room.getParticipants().map(p => p.userId);
     },
 
     /**
@@ -2098,9 +2106,7 @@ export default {
                 })
                 .then(() => {
                     logger.log('switched local video device');
-                    APP.store.dispatch(updateSettings({
-                        cameraDeviceId
-                    }));
+                    this._updateVideoDeviceId();
                 })
                 .catch(err => {
                     APP.UI.showCameraErrorNotification(err);
@@ -2129,12 +2135,11 @@ export default {
 
                     return stream;
                 })
-                .then(stream => {
-                    this.useAudioStream(stream);
+                .then(stream => this.useAudioStream(stream))
+                .then(() => {
                     logger.log('switched local audio device');
-                    APP.store.dispatch(updateSettings({
-                        micDeviceId
-                    }));
+
+                    this._updateAudioDeviceId();
                 })
                 .catch(err => {
                     APP.UI.showMicErrorNotification(err);
@@ -2283,20 +2288,23 @@ export default {
     },
 
     /**
-     * Inits list of current devices and event listener for device change.
+     * Updates the list of current devices.
+     * @param {boolean} setDeviceListChangeHandler - Whether to add the deviceList change handlers.
      * @private
      * @returns {Promise}
      */
-    _initDeviceList() {
+    _initDeviceList(setDeviceListChangeHandler = false) {
         const { mediaDevices } = JitsiMeetJS;
 
         if (mediaDevices.isDeviceListAvailable()
                 && mediaDevices.isDeviceChangeAvailable()) {
-            this.deviceChangeListener = devices =>
-                window.setTimeout(() => this._onDeviceListChanged(devices), 0);
-            mediaDevices.addEventListener(
-                JitsiMediaDevicesEvents.DEVICE_LIST_CHANGED,
-                this.deviceChangeListener);
+            if (setDeviceListChangeHandler) {
+                this.deviceChangeListener = devices =>
+                    window.setTimeout(() => this._onDeviceListChanged(devices), 0);
+                mediaDevices.addEventListener(
+                    JitsiMediaDevicesEvents.DEVICE_LIST_CHANGED,
+                    this.deviceChangeListener);
+            }
 
             const { dispatch } = APP.store;
 
@@ -2305,24 +2313,42 @@ export default {
                     // Ugly way to synchronize real device IDs with local
                     // storage and settings menu. This is a workaround until
                     // getConstraints() method will be implemented in browsers.
-                    if (this.localAudio) {
-                        dispatch(updateSettings({
-                            micDeviceId: this.localAudio.getDeviceId()
-                        }));
-                    }
+                    this._updateAudioDeviceId();
 
-                    if (this.localVideo
-                        && this.localVideo.videoType === 'camera') {
-                        dispatch(updateSettings({
-                            cameraDeviceId: this.localVideo.getDeviceId()
-                        }));
-                    }
+                    this._updateVideoDeviceId();
 
                     APP.UI.onAvailableDevicesChanged(devices);
                 });
         }
 
         return Promise.resolve();
+    },
+
+    /**
+     * Updates the settings for the currently used video device, extracting
+     * the device id from the used track.
+     * @private
+     */
+    _updateVideoDeviceId() {
+        if (this.localVideo
+            && this.localVideo.videoType === 'camera') {
+            APP.store.dispatch(updateSettings({
+                cameraDeviceId: this.localVideo.getDeviceId()
+            }));
+        }
+    },
+
+    /**
+     * Updates the settings for the currently used audio device, extracting
+     * the device id from the used track.
+     * @private
+     */
+    _updateAudioDeviceId() {
+        if (this.localAudio) {
+            APP.store.dispatch(updateSettings({
+                micDeviceId: this.localAudio.getDeviceId()
+            }));
+        }
     },
 
     /**
@@ -2333,6 +2359,8 @@ export default {
      * @returns {Promise}
      */
     _onDeviceListChanged(devices) {
+        const oldDevices = APP.store.getState()['features/base/devices'].availableDevices;
+
         APP.store.dispatch(updateDeviceList(devices));
 
         const newDevices
@@ -2344,6 +2372,10 @@ export default {
         const promises = [];
         const audioWasMuted = this.isLocalAudioMuted();
         const videoWasMuted = this.isLocalVideoMuted();
+        const requestedInput = {
+            audio: Boolean(newDevices.audioinput),
+            video: Boolean(newDevices.videoinput)
+        };
 
         if (typeof newDevices.audiooutput !== 'undefined') {
             const { dispatch } = APP.store;
@@ -2353,6 +2385,37 @@ export default {
 
 
             promises.push(setAudioOutputPromise);
+        }
+
+        // Handles the use case when the default device is changed (we are always stopping the streams because it's
+        // simpler):
+        // If the default device is changed we need to first stop the local streams and then call GUM. Otherwise GUM
+        // will return a stream using the old default device.
+        if (requestedInput.audio && this.localAudio) {
+            this.localAudio.stopStream();
+        }
+
+        if (requestedInput.video && this.localVideo) {
+            this.localVideo.stopStream();
+        }
+
+        // Let's handle unknown/non-preferred devices
+        const newAvailDevices
+            = APP.store.getState()['features/base/devices'].availableDevices;
+
+        if (typeof newDevices.audiooutput === 'undefined') {
+            APP.store.dispatch(
+                checkAndNotifyForNewDevice(newAvailDevices.audioOutput, oldDevices.audioOutput));
+        }
+
+        if (!requestedInput.audio) {
+            APP.store.dispatch(
+                checkAndNotifyForNewDevice(newAvailDevices.audioInput, oldDevices.audioInput));
+        }
+
+        if (!requestedInput.video) {
+            APP.store.dispatch(
+                checkAndNotifyForNewDevice(newAvailDevices.videoInput, oldDevices.videoInput));
         }
 
         promises.push(
@@ -2373,8 +2436,25 @@ export default {
                     });
 
                     return Promise.all(muteSyncPromises)
-                        .then(() => Promise.all(
-                            this._setLocalAudioVideoStreams(tracks)));
+                        .then(() =>
+                            Promise.all(Object.keys(requestedInput).map(mediaType => {
+                                if (requestedInput[mediaType]) {
+                                    const useStream
+                                        = mediaType === 'audio'
+                                            ? this.useAudioStream.bind(this)
+                                            : this.useVideoStream.bind(this);
+
+                                    // Use the new stream or null if we failed to obtain it.
+                                    return useStream(tracks.find(track => track.getType() === mediaType) || null)
+                                        .then(() => {
+                                            mediaType === 'audio'
+                                                ? this._updateAudioDeviceId()
+                                                : this._updateVideoDeviceId();
+                                        });
+                                }
+
+                                return Promise.resolve();
+                            })));
                 })
                 .then(() => {
                     // Log and sync known mute state.
