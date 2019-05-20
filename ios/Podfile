@@ -13,11 +13,11 @@ target 'jitsi-meet' do
   #pod 'Firebase/DynamicLinks', '~> 5.18.0'
 
   #pod 'Firebase', '~> 5.18.0'
-  pod 'FirebaseCore', :path => '/Users/haoqi/Downloads/firebase-ios-sdk-5.19.0'
-  pod 'GoogleUtilities', :path => '/Users/haoqi/Downloads/firebase-ios-sdk-5.19.0'
-  #pod 'FirebaseAnalytics', :path => '/Users/haoqi/Downloads/FirebaseAnalytics-6.0.0'
+  pod 'FirebaseCore', :path => './firebase-ios-sdk-5.19.0'
+  pod 'GoogleUtilities', :path => './firebase-ios-sdk-5.19.0'
+  #pod 'FirebaseAnalytics', :path => './FirebaseAnalytics-6.0.0'
 
-  pod 'FirebaseDynamicLinks', :path => '/Users/haoqi/Downloads/firebase-ios-sdk-5.19.0'
+  pod 'FirebaseDynamicLinks', :path => './firebase-ios-sdk-5.19.0'
 
 end
 

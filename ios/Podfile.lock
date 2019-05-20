@@ -133,11 +133,11 @@ DEPENDENCIES:
   - Crashlytics (~> 3.12.0)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - Fabric (~> 1.9.0)
-  - FirebaseCore (from `../../base/firebase-ios-sdk-5.19.0`)
-  - FirebaseDynamicLinks (from `../../base/firebase-ios-sdk-5.19.0`)
+  - FirebaseCore (from `./firebase-ios-sdk-5.19.0`)
+  - FirebaseDynamicLinks (from `./firebase-ios-sdk-5.19.0`)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - GoogleUtilities (from `../../base/firebase-ios-sdk-5.19.0`)
+  - GoogleUtilities (from `./firebase-ios-sdk-5.19.0`)
   - ObjectiveDropboxOfficial (~> 3.9.4)
   - react-native-background-timer (from `../node_modules/react-native-background-timer`)
   - react-native-calendar-events (from `../node_modules/react-native-calendar-events`)
@@ -175,15 +175,15 @@ EXTERNAL SOURCES:
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   FirebaseCore:
-    :path: "../../base/firebase-ios-sdk-5.19.0"
+    :path: "./firebase-ios-sdk-5.19.0"
   FirebaseDynamicLinks:
-    :path: "../../base/firebase-ios-sdk-5.19.0"
+    :path: "./firebase-ios-sdk-5.19.0"
   Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/Folly.podspec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
   GoogleUtilities:
-    :path: "../../base/firebase-ios-sdk-5.19.0"
+    :path: "./firebase-ios-sdk-5.19.0"
   React:
     :path: "../node_modules/react-native"
   react-native-background-timer:
@@ -229,6 +229,6 @@ SPEC CHECKSUMS:
   SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
   yoga: 3768a3026ade0fb46a68f3a31a917cf86bc34fc4
 
-PODFILE CHECKSUM: 45d248152e25cd327983644a6f9f4ef9a8d834b9
+PODFILE CHECKSUM: ee698981e83edbf12b48fd2cd08334b92675a49d
 
 COCOAPODS: 1.6.1
