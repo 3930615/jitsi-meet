@@ -23,7 +23,7 @@ import {
     getDialInNumbers,
     invitePeopleAndChatRooms
 } from './functions';
-import { sendEvent } from '../mobile/external-api';
+// import { sendEvent } from '../mobile/external-api';
 
 const logger = require('jitsi-meet-logger').getLogger(__filename);
 
@@ -319,7 +319,7 @@ export function enterInvite() {
             const members = getParticipantsUserInfo(getState);
             console.log('members : ', members);
             // const members = APP.conference.listMembersUserIds();
-            sendEvent(getState, 'ENTER_INVITE', {members});
+            // sendEvent(getState, 'ENTER_INVITE', {members});
 
             // alert('aaaa')
             // const { Invite } = NativeModules;
