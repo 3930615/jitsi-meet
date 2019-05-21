@@ -17,7 +17,8 @@ import { Container } from '../../../base/react';
 import { connect } from '../../../base/redux';
 import { StyleType } from '../../../base/styles';
 import { getTrackByMediaTypeAndParticipant } from '../../../base/tracks';
-
+import { ConnectionIndicator } from '../../../connection-indicator';
+import { DisplayNameLabel } from '../../../display-name';
 import { RemoteVideoMenu } from '../../../remote-video-menu';
 
 import AudioMutedIndicator from './AudioMutedIndicator';
@@ -91,6 +92,11 @@ type Props = {
     participant: Object,
 
     /**
+     * Whether to display or hide the display name of the participant in the thumbnail.
+     */
+    renderDisplayName: ?boolean,
+
+    /**
      * Optional styling to add or override on the Thumbnail component root.
      */
     styleOverrides?: Object
@@ -119,7 +125,8 @@ class Thumbnail extends Component<Props> {
             _videoTrack: videoTrack,
             disablePin,
             disableTint,
-            participant
+            participant,
+            renderDisplayName
         } = this.props;
 
         // We don't render audio in any of the following:
@@ -156,7 +163,6 @@ class Thumbnail extends Component<Props> {
                             = { audioTrack.jitsiTrack.getOriginalStream() } /> }
 
                 <ParticipantView
-                    isSmall = { true }
                     avatarSize = { AVATAR_SIZE }
                     participantId = { participantId }
                     style = { _styles.participantViewStyle }
@@ -164,15 +170,29 @@ class Thumbnail extends Component<Props> {
                     tintStyle = { _styles.activeThumbnailTint }
                     zOrder = { 1 } />
 
+                { renderDisplayName && <DisplayNameLabel participantId = { participantId } /> }
+
                 { participant.role === PARTICIPANT_ROLE.MODERATOR
                     && <View style = { styles.moderatorIndicatorContainer }>
                         <ModeratorIndicator />
                     </View> }
 
-                <View style = { styles.thumbnailTopIndicatorContainer }>
+                <View
+                    style = { [
+                        styles.thumbnailTopIndicatorContainer,
+                        styles.thumbnailTopLeftIndicatorContainer
+                    ] }>
                     <RaisedHandIndicator participantId = { participant.id } />
                     { participant.dominantSpeaker
                         && <DominantSpeakerIndicator /> }
+                </View>
+
+                <View
+                    style = { [
+                        styles.thumbnailTopIndicatorContainer,
+                        styles.thumbnailTopRightIndicatorContainer
+                    ] }>
+                    <ConnectionIndicator participantId = { participant.id } />
                 </View>
 
                 <Container style = { styles.thumbnailIndicatorContainer }>

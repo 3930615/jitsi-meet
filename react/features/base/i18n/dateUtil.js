@@ -98,7 +98,5 @@ function _getSupportedLocale() {
         }
     }
 
-    // return supportedLocale || 'en';
-    return 'zh-cn';
-
+    return supportedLocale || 'en';
 }

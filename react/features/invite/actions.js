@@ -1,31 +1,26 @@
 // @flow
 
 import type { Dispatch } from 'redux';
-import { NativeModules } from 'react-native';
 
 import { getInviteURL } from '../base/connection';
 import { inviteVideoRooms } from '../videosipgw';
-import { getParticipants, getParticipantsUserInfo } from '../base/participants';
-
-import { getAppProp } from '../base/app';
-import { Platform } from '../base/react';
+import { getParticipants } from '../base/participants';
 
 import {
     ADD_PENDING_INVITE_REQUEST,
     BEGIN_ADD_PEOPLE,
     REMOVE_PENDING_INVITE_REQUESTS,
     SET_CALLEE_INFO_VISIBLE,
+    SET_DIAL_IN_SUMMARY_VISIBLE,
     SET_INVITE_DIALOG_VISIBLE,
     UPDATE_DIAL_IN_NUMBERS_FAILED,
-    UPDATE_DIAL_IN_NUMBERS_SUCCESS,
-    ENTER_INVITE
+    UPDATE_DIAL_IN_NUMBERS_SUCCESS
 } from './actionTypes';
 import {
     getDialInConferenceID,
     getDialInNumbers,
     invitePeopleAndChatRooms
 } from './functions';
-import { sendEvent } from '../mobile/external-api';
 
 const logger = require('jitsi-meet-logger').getLogger(__filename);
 
@@ -263,6 +258,15 @@ export function addPendingInviteRequest(
 }
 
 /**
+ * Action to hide the dial in summary.
+ *
+ * @returns {showDialInSummary}
+ */
+export function hideDialInSummary() {
+    return showDialInSummary(undefined);
+}
+
+/**
  * Removes all pending invite requests.
  *
  * @returns {{
@@ -276,42 +280,17 @@ export function removePendingInviteRequests() {
 }
 
 /**
- * Enters (or rather initiates entering) picture-in-picture.
- * Helper function to enter PiP mode. This is triggered by user request
- * (either pressing the button in the toolbox or the home button on Android)
- * ans this triggers the PiP mode, iff it's available and we are in a
- * conference.
+ * Action to set the dial in summary url (and show it).
  *
- * @public
- * @returns {Function}
+ * @param {?string} locationUrl - The location URL to show the dial in summary for.
+ * @returns {{
+ *     type: SET_DIAL_IN_SUMMARY_VISIBLE,
+ *     summaryUrl: ?string
+ * }}
  */
-export function enterInvite() {
-
-    return (dispatch: Dispatch<any>, getState: Function) => {
-        // XXX At the time of this writing this action can only be dispatched by
-        // the button which is on the conference view, which means that it's
-        // fine to enter PiP mode.
-        if (getAppProp(getState, 'inviteEnabled')) {
-            const members = getParticipantsUserInfo(getState);
-            console.log('members : ', members);
-            // const members = APP.conference.listMembersUserIds();
-            sendEvent(getState, 'ENTER_INVITE', {members});
-
-            // alert('aaaa')
-            // const { Invite } = NativeModules;
-            // console.log('invite==>',Invite)
-            // const members = [];
-            // const p
-            //     = Platform.OS === 'android' || Platform.OS === 'ios'
-            //     ? Invite
-            //         ? Invite.enterInvite({ members })
-            //         : Promise.reject(
-            //             new Error('invite not supported'))
-            //     : Promise.resolve();
-            //
-            // p.then(
-            //     () => dispatch({ type: ENTER_INVITE }),
-            //     e => logger.warn(`Error entering invite mode: ${e}`));
-        }
+export function showDialInSummary(locationUrl: ?string) {
+    return {
+        type: SET_DIAL_IN_SUMMARY_VISIBLE,
+        summaryUrl: locationUrl
     };
 }

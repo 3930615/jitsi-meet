@@ -225,7 +225,6 @@ function _participantJoined({ participant }) {
         name,
         pinned: pinned || false,
         presence,
-        role: role || PARTICIPANT_ROLE.NONE,
-        userId: 0
+        role: role || PARTICIPANT_ROLE.NONE
     };
 }

@@ -31,11 +31,6 @@
  */
 @property (nonatomic, copy, nullable) NSString *token;
 
-@property (nonatomic, copy, nullable) NSString *displayName;
-@property (nonatomic, copy, nullable) NSString *userId;
-@property (nonatomic, copy, nullable) NSString *avatarURL;
-
-
 /**
  * Color scheme override, see:
  * https://github.com/jitsi/jitsi-meet/blob/master/react/features/base/color-scheme/defaultScheme.js
@@ -64,10 +59,6 @@
 @property (nonatomic, copy, nullable, readonly) NSString *room;
 @property (nonatomic, copy, nullable, readonly) NSString *token;
 
-@property (nonatomic, copy, nullable) NSString *displayName;
-@property (nonatomic, copy, nullable) NSString *userId;
-@property (nonatomic, copy, nullable) NSString *avatarURL;
-
 @property (nonatomic, copy, nullable) NSDictionary *colorScheme;
 
 @property (nonatomic, readonly) BOOL audioOnly;
@@ -76,7 +67,7 @@
 
 @property (nonatomic, readonly) BOOL welcomePageEnabled;
 
-+ (instancetype)fromBuilder:(void (^)(JitsiMeetConferenceOptionsBuilder *))initBlock;
-- (instancetype)init NS_UNAVAILABLE;
++ (instancetype _Nonnull)fromBuilder:(void (^_Nonnull)(JitsiMeetConferenceOptionsBuilder *_Nonnull))initBlock;
+- (instancetype _Nonnull)init NS_UNAVAILABLE;
 
 @end

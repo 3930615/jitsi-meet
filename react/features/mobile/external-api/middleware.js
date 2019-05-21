@@ -8,29 +8,20 @@ import {
     JITSI_CONFERENCE_URL_KEY,
     SET_ROOM,
     forEachConference,
-    isRoomValid,
-    USER_JOINED,
-    USER_LEFT,
-    USER_STATUS_CHANGED,
-    PARTICIPANT_CONN_STATUS_CHANGED
+    isRoomValid
 } from '../../base/conference';
 import { LOAD_CONFIG_ERROR } from '../../base/config';
-import { CONNECTION_FAILED } from '../../base/connection';
+import {
+    CONNECTION_DISCONNECTED,
+    CONNECTION_FAILED,
+    JITSI_CONNECTION_CONFERENCE_KEY,
+    JITSI_CONNECTION_URL_KEY
+} from '../../base/connection';
 import { MiddlewareRegistry } from '../../base/redux';
 import { toURLString } from '../../base/util';
 import { ENTER_PICTURE_IN_PICTURE } from '../picture-in-picture';
 
 import { sendEvent } from './functions';
-
-import {
-    HIDDEN_PARTICIPANT_JOINED,
-    HIDDEN_PARTICIPANT_LEFT,
-    PARTICIPANT_UPDATED,
-    PARTICIPANT_JOINED,
-    PARTICIPANT_LEFT
-} from '../../base/participants';
-
-// declare var APP: Object;
 
 /**
  * Event which will be emitted on the native side to indicate the conference
@@ -50,35 +41,6 @@ MiddlewareRegistry.register(store => next => action => {
     const { type } = action;
 
     switch (type) {
-    case PARTICIPANT_LEFT: {
-        // console.log('receive listener : ', type, action);
-        // const memsCount = APP.conference.membersCount;
-        // alert(memsCount);
-        // const { participant } = action;
-        // sendEvent(store, type, {});
-        break;
-    }
-    case PARTICIPANT_JOINED: {
-        // console.log('receive listener : ', type, action);
-        // alert('joined');
-        //
-        // const { participant } = action;
-        // if (!participant.local) {
-        //     // const memsCount = APP.conference.membersCount;
-        //     // alert(memsCount);
-        //     sendEvent(store, type, {});
-        // }
-        break;
-    }
-    case HIDDEN_PARTICIPANT_JOINED:
-    case HIDDEN_PARTICIPANT_LEFT:
-    case PARTICIPANT_UPDATED:
-    case USER_JOINED:
-    case USER_LEFT:
-    case USER_STATUS_CHANGED:
-    case PARTICIPANT_CONN_STATUS_CHANGED:
-        // console.log('receive listener : ', action);
-        break;
     case CONFERENCE_FAILED: {
         const { error, ...data } = action;
 
@@ -105,6 +67,27 @@ MiddlewareRegistry.register(store => next => action => {
     case CONFERENCE_WILL_JOIN:
         _sendConferenceEvent(store, action);
         break;
+
+    case CONNECTION_DISCONNECTED: {
+        // FIXME: This is a hack. See the description in the JITSI_CONNECTION_CONFERENCE_KEY constant definition.
+        // Check if this connection was attached to any conference. If it wasn't, fake a CONFERENCE_TERMINATED event.
+        const { connection } = action;
+        const conference = connection[JITSI_CONNECTION_CONFERENCE_KEY];
+
+        if (!conference) {
+            // This action will arrive late, so the locationURL stored on the state is no longer valid.
+            const locationURL = connection[JITSI_CONNECTION_URL_KEY];
+
+            sendEvent(
+                store,
+                CONFERENCE_TERMINATED,
+                /* data */ {
+                    url: toURLString(locationURL)
+                });
+        }
+
+        break;
+    }
 
     case CONNECTION_FAILED:
         !action.error.recoverable

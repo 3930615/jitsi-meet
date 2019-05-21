@@ -7,6 +7,7 @@ import { Container } from '../../../base/react';
 import { ColorSchemeRegistry } from '../../../base/color-scheme';
 import { connect } from '../../../base/redux';
 import { StyleType } from '../../../base/styles';
+import { ChatButton } from '../../../chat';
 
 import { isToolboxVisible } from '../../functions';
 import { HANGUP_BUTTON_SIZE } from '../../constants';
@@ -14,13 +15,9 @@ import { HANGUP_BUTTON_SIZE } from '../../constants';
 import AudioMuteButton from '../AudioMuteButton';
 import HangupButton from '../HangupButton';
 
-// import OverflowMenuButton from './OverflowMenuButton';
+import OverflowMenuButton from './OverflowMenuButton';
 import styles from './styles';
 import VideoMuteButton from '../VideoMuteButton';
-
-import ToggleCameraButton from './ToggleCameraButton';
-// import { InviteButton } from '../../../mobile/invite';
-import { InviteButton } from '../../../invite';
 
 /**
  * The number of buttons other than {@link HangupButton} to render in
@@ -242,9 +239,11 @@ class Toolbox extends Component<Props, State> {
             <View
                 pointerEvents = 'box-none'
                 style = { styles.toolbar }>
-                <InviteButton
+                <ChatButton
                     styles = { buttonStyles }
-                    toggledStyles = { toggledButtonStyles } />
+                    toggledStyles = {
+                        this._getChatButtonToggledStyle(toggledButtonStyles)
+                    } />
                 <AudioMuteButton
                     styles = { buttonStyles }
                     toggledStyles = { toggledButtonStyles } />
@@ -253,7 +252,7 @@ class Toolbox extends Component<Props, State> {
                 <VideoMuteButton
                     styles = { buttonStyles }
                     toggledStyles = { toggledButtonStyles } />
-                <ToggleCameraButton
+                <OverflowMenuButton
                     styles = { buttonStyles }
                     toggledStyles = { toggledButtonStyles } />
             </View>

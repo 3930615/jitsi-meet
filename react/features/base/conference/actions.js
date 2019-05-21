@@ -1,12 +1,13 @@
 // @flow
 
-import UIEvents from '../../../../service/UI/UIEvents';
-
 import {
     createStartMutedConfigurationEvent,
     sendAnalytics
 } from '../../analytics';
 import { getName } from '../../app';
+import { endpointMessageReceived } from '../../subtitles';
+
+import { JITSI_CONNECTION_CONFERENCE_KEY } from '../connection';
 import { JitsiConferenceEvents } from '../lib-jitsi-meet';
 import { setAudioMuted, setVideoMuted } from '../media';
 import {
@@ -17,7 +18,6 @@ import {
     participantRoleChanged,
     participantUpdated
 } from '../participants';
-import { endpointMessageReceived } from '../../subtitles';
 import { getLocalTracks, trackAdded, trackRemoved } from '../tracks';
 import { getJitsiMeetGlobalNS } from '../util';
 
@@ -49,8 +49,7 @@ import {
     AVATAR_ID_COMMAND,
     AVATAR_URL_COMMAND,
     EMAIL_COMMAND,
-    JITSI_CONFERENCE_URL_KEY,
-    USERID_COMMAND
+    JITSI_CONFERENCE_URL_KEY
 } from './constants';
 import {
     _addLocalTracksToConference,
@@ -190,13 +189,6 @@ function _addConferenceListeners(conference, dispatch) {
             conference,
             id,
             email: data.value
-        })));
-    conference.addCommandListener(
-        USERID_COMMAND,
-        (data, id) => dispatch(participantUpdated({
-            conference,
-            id,
-            userId: data.value
         })));
 }
 
@@ -362,9 +354,6 @@ export function conferenceWillLeave(conference: Object) {
  * Initializes a new conference.
  *
  * @returns {Function}
- *
- * @todo 在此处添加参数值
- *
  */
 export function createConference() {
     return (dispatch: Function, getState: Function) => {
@@ -391,7 +380,10 @@ export function createConference() {
                     getWiFiStatsMethod: getJitsiMeetGlobalNS().getWiFiStats
                 });
 
+        connection[JITSI_CONNECTION_CONFERENCE_KEY] = conference;
+
         conference[JITSI_CONFERENCE_URL_KEY] = locationURL;
+
         dispatch(_conferenceWillJoin(conference));
 
         _addConferenceListeners(conference, dispatch);
@@ -558,10 +550,6 @@ export function setDesktopSharingEnabled(desktopSharingEnabled: boolean) {
  * }}
  */
 export function setFollowMe(enabled: boolean) {
-    if (typeof APP !== 'undefined') {
-        APP.UI.emitEvent(UIEvents.FOLLOW_ME_ENABLED, enabled);
-    }
-
     return {
         type: SET_FOLLOW_ME,
         enabled

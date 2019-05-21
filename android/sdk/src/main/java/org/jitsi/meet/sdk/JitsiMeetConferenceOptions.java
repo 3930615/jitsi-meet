@@ -64,12 +64,6 @@ public class JitsiMeetConferenceOptions implements Parcelable {
      */
     private Boolean welcomePageEnabled;
 
-    private String displayName;
-
-    private String userId;
-
-    private String avatarURL;
-
     /**
      * Class used to build the immutable {@link JitsiMeetConferenceOptions} object.
      */
@@ -85,12 +79,6 @@ public class JitsiMeetConferenceOptions implements Parcelable {
         private Boolean videoMuted;
 
         private Boolean welcomePageEnabled;
-
-        private String displayName;
-
-        private String userId;
-
-        private String avatarURL;
 
         public Builder() {
         }
@@ -187,18 +175,6 @@ public class JitsiMeetConferenceOptions implements Parcelable {
             return this;
         }
 
-        public void setDisplayName(String displayName) {
-            this.displayName = displayName;
-        }
-
-        public void setUserId(String userId) {
-            this.userId = userId;
-        }
-
-        public void setAvatarURL(String avatarURL) {
-            this.avatarURL = avatarURL;
-        }
-
         /**
          * Builds the immutable {@link JitsiMeetConferenceOptions} object with the configuration
          * that this {@link Builder} instance specified.
@@ -216,9 +192,6 @@ public class JitsiMeetConferenceOptions implements Parcelable {
             options.videoMuted = this.videoMuted;
             options.welcomePageEnabled = this.welcomePageEnabled;
 
-            options.avatarURL = this.avatarURL;
-            options.displayName = this.displayName;
-            options.userId = this.userId;
             return options;
         }
     }
@@ -238,10 +211,6 @@ public class JitsiMeetConferenceOptions implements Parcelable {
         videoMuted = tmpVideoMuted == 0 ? null : tmpVideoMuted == 1;
         byte tmpWelcomePageEnabled = in.readByte();
         welcomePageEnabled = tmpWelcomePageEnabled == 0 ? null : tmpWelcomePageEnabled == 1;
-
-        displayName = in.readString();
-        userId = in.readString();
-        avatarURL = in.readString();
     }
 
     Bundle asProps() {
@@ -253,18 +222,6 @@ public class JitsiMeetConferenceOptions implements Parcelable {
 
         if (welcomePageEnabled != null) {
             props.putBoolean("welcomePageEnabled", welcomePageEnabled);
-        }
-
-        if (displayName != null) {
-            props.putString("displayName", displayName);
-        }
-
-        if (userId != null) {
-            props.putString("userId", userId);
-        }
-
-        if (avatarURL != null) {
-            props.putString("avatarURL", avatarURL);
         }
 
         // TODO: get rid of this.
@@ -330,10 +287,6 @@ public class JitsiMeetConferenceOptions implements Parcelable {
         dest.writeByte((byte) (audioOnly == null ? 0 : audioOnly ? 1 : 2));
         dest.writeByte((byte) (videoMuted == null ? 0 : videoMuted ? 1 : 2));
         dest.writeByte((byte) (welcomePageEnabled == null ? 0 : welcomePageEnabled ? 1 : 2));
-
-        dest.writeString(displayName);
-        dest.writeString(userId);
-        dest.writeString(avatarURL);
     }
 
     @Override

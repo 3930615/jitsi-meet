@@ -7,8 +7,7 @@ import { connect } from '../../../../base/redux';
 import { AbstractButton } from '../../../../base/toolbox';
 import type { AbstractButtonProps } from '../../../../base/toolbox';
 
-import { setAddPeopleDialogVisible, enterInvite } from '../../../actions';
-
+import { setAddPeopleDialogVisible } from '../../../actions';
 import { isAddPeopleEnabled, isDialOutEnabled } from '../../../functions';
 
 type Props = AbstractButtonProps & {
@@ -41,9 +40,7 @@ class InviteButton extends AbstractButton<Props, *> {
      * @returns {void}
      */
     _handleClick() {
-        // this.props.dispatch(setAddPeopleDialogVisible(true));
-        console.log('==>dispatch event');
-        this.props.dispatch(enterInvite());
+        this.props.dispatch(setAddPeopleDialogVisible(true));
     }
 
     /**

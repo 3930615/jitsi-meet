@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component, Fragment, PureComponent } from 'react';
-import { Dimensions, Image, Platform, View, Text } from 'react-native';
+import { Dimensions, Image, Platform, View } from 'react-native';
 import FastImage, {
     type CacheControls,
     type Priorities

@@ -230,13 +230,6 @@ export function getParticipants(stateful: Object | Function) {
     return _getAllParticipants(stateful).filter(p => !p.isFakeParticipant);
 }
 
-export function getParticipantsUserInfo(stateful: Object | Function) {
-    var participants = getParticipants(stateful);
-    return participants.map(p => {
-        return {userId: p.userId, id: p.id, name: p.name, avatarURL: p.avatarURL};
-    });
-}
-
 /**
  * Returns the participant which has its pinned state set to truthy.
  *
@@ -273,9 +266,12 @@ function _getAllParticipants(stateful) {
  *
  * @param {Object|Function} stateful - Object or function that can be resolved
  * to the Redux state.
+ * @param {?boolean} ignoreToken - When true we ignore the token check.
  * @returns {boolean}
  */
-export function isLocalParticipantModerator(stateful: Object | Function) {
+export function isLocalParticipantModerator(
+        stateful: Object | Function,
+        ignoreToken: ?boolean = false) {
     const state = toState(stateful);
     const localParticipant = getLocalParticipant(state);
 
@@ -285,7 +281,8 @@ export function isLocalParticipantModerator(stateful: Object | Function) {
 
     return (
         localParticipant.role === PARTICIPANT_ROLE.MODERATOR
-            && (!state['features/base/config'].enableUserRolesBasedOnToken
+        && (ignoreToken
+                || !state['features/base/config'].enableUserRolesBasedOnToken
                 || !state['features/base/jwt'].isGuest));
 }
 

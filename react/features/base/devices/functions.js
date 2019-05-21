@@ -44,19 +44,54 @@ export function getAudioOutputDeviceId() {
  *
  * @param {Object} state - The redux state.
  * @param {string} label - The label.
+ * @param {string} kind - The type of the device. One of "audioInput",
+ * "audioOutput", and "videoInput". Also supported is all lowercase versions
+ * of the preceding types.
  * @returns {string|undefined}
  */
-export function getDeviceIdByLabel(state: Object, label: string) {
-    const types = [ 'audioInput', 'audioOutput', 'videoInput' ];
+export function getDeviceIdByLabel(state: Object, label: string, kind: string) {
+    const webrtcKindToJitsiKindTranslator = {
+        audioinput: 'audioInput',
+        audiooutput: 'audioOutput',
+        videoinput: 'videoInput'
+    };
 
-    for (const type of types) {
-        const device
-            = (state['features/base/devices'].availableDevices[type] || [])
-                .find(d => d.label === label);
+    const kindToSearch = webrtcKindToJitsiKindTranslator[kind] || kind;
 
-        if (device) {
-            return device.deviceId;
-        }
+    const device
+        = (state['features/base/devices'].availableDevices[kindToSearch] || [])
+            .find(d => d.label === label);
+
+    if (device) {
+        return device.deviceId;
+    }
+}
+
+/**
+ * Finds a device with a label that matches the passed id and returns its label.
+ *
+ * @param {Object} state - The redux state.
+ * @param {string} id - The device id.
+ * @param {string} kind - The type of the device. One of "audioInput",
+ * "audioOutput", and "videoInput". Also supported is all lowercase versions
+ * of the preceding types.
+ * @returns {string|undefined}
+ */
+export function getDeviceLabelById(state: Object, id: string, kind: string) {
+    const webrtcKindToJitsiKindTranslator = {
+        audioinput: 'audioInput',
+        audiooutput: 'audioOutput',
+        videoinput: 'videoInput'
+    };
+
+    const kindToSearch = webrtcKindToJitsiKindTranslator[kind] || kind;
+
+    const device
+        = (state['features/base/devices'].availableDevices[kindToSearch] || [])
+        .find(d => d.deviceId === id);
+
+    if (device) {
+        return device.label;
     }
 }
 
@@ -110,14 +145,32 @@ export function groupDevicesByKind(devices: Object[]): Object {
  *
  * @param {string} newId - New audio output device id.
  * @param {Function} dispatch - The Redux dispatch function.
+ * @param {boolean} userSelection - Whether this is a user selection update.
+ * @param {?string} newLabel - New audio output device label to store.
  * @returns {Promise}
  */
 export function setAudioOutputDeviceId(
         newId: string = 'default',
-        dispatch: Function): Promise<*> {
+        dispatch: Function,
+        userSelection: boolean = false,
+        newLabel: ?string): Promise<*> {
     return JitsiMeetJS.mediaDevices.setAudioOutputDevice(newId)
-        .then(() =>
-            dispatch(updateSettings({
-                audioOutputDeviceId: newId
-            })));
+        .then(() => {
+            const newSettings = {
+                audioOutputDeviceId: newId,
+                userSelectedAudioOutputDeviceId: undefined,
+                userSelectedAudioOutputDeviceLabel: undefined
+            };
+
+            if (userSelection) {
+                newSettings.userSelectedAudioOutputDeviceId = newId;
+                newSettings.userSelectedAudioOutputDeviceLabel = newLabel;
+            } else {
+                // a flow workaround, I needed to add 'userSelectedAudioOutputDeviceId: undefined'
+                delete newSettings.userSelectedAudioOutputDeviceId;
+                delete newSettings.userSelectedAudioOutputDeviceLabel;
+            }
+
+            return dispatch(updateSettings(newSettings));
+        });
 }

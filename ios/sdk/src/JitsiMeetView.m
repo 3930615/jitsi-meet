@@ -124,10 +124,6 @@ static void initializeViewsMap() {
     NSMutableDictionary *props = mergeProps([[JitsiMeet sharedInstance] getDefaultProps], newProps);
 
     props[@"externalAPIScope"] = externalAPIScope;
-//    props[@"displayName"] = @"test";
-//    props[@"userId"] = @"432";
-//    props[@"avatarURL"] = @"http://10.6.5.184:8089/avatar/t/47/10047.jpg";
-    props[@"inviteEnabled"] = @(self.delegate && [self.delegate respondsToSelector:@selector(enterInvite:)]);
 
     // TODO: put this in some 'flags' field
     props[@"pictureInPictureEnabled"]
