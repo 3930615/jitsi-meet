@@ -139,6 +139,10 @@
         _serverURL = builder.serverURL;
         _room = builder.room;
         _token = builder.token;
+        
+        _userId = builder.userId;
+        _displayName = builder.displayName;
+        _avatarURL = builder.avatarURL;
 
         _colorScheme = builder.colorScheme;
 
@@ -173,6 +177,16 @@
         props[@"welcomePageEnabled"] = @(self.welcomePageEnabled);
     }
 
+    if (_displayName != nil) {
+        props[@"displayName"] = self.displayName;
+    }
+    if (_userId != nil) {
+        props[@"userId"] = self.userId;
+    }
+    if (_avatarURL != nil) {
+        props[@"avatarURL"] = self.avatarURL;
+    }
+    
     NSMutableDictionary *config = [[NSMutableDictionary alloc] init];
     if (_audioOnly != nil) {
         config[@"startAudioOnly"] = @(self.audioOnly);
@@ -183,6 +197,7 @@
     if (_videoMuted != nil) {
         config[@"startWithVideoMuted"] = @(self.videoMuted);
     }
+
 
     NSMutableDictionary *urlProps = [[NSMutableDictionary alloc] init];
 

@@ -954,6 +954,10 @@ export default {
         return room.getParticipants().map(p => p.getId());
     },
 
+    listMembersUserIds() {
+        return room.getParticipants().map(p => p.userId);
+    },
+
     /**
      * Checks whether the participant identified by id is a moderator.
      * @id id to search for participant

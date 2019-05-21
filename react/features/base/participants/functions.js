@@ -230,6 +230,13 @@ export function getParticipants(stateful: Object | Function) {
     return _getAllParticipants(stateful).filter(p => !p.isFakeParticipant);
 }
 
+export function getParticipantsUserInfo(stateful: Object | Function) {
+    var participants = getParticipants(stateful);
+    return participants.map(p => {
+        return {userId: p.userId, id: p.id, name: p.name, avatarURL: p.avatarURL};
+    });
+}
+
 /**
  * Returns the participant which has its pinned state set to truthy.
  *

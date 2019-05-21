@@ -10,11 +10,13 @@ import {
 } from '../participants';
 import { toState } from '../redux';
 
+import { getAppProp } from '../app';
+
 import {
     AVATAR_ID_COMMAND,
     AVATAR_URL_COMMAND,
     EMAIL_COMMAND,
-    JITSI_CONFERENCE_URL_KEY,
+    JITSI_CONFERENCE_URL_KEY, USERID_COMMAND,
     VIDEO_QUALITY_LEVELS
 } from './constants';
 
@@ -307,11 +309,13 @@ export function sendLocalParticipant(
             setLocalParticipantProperty: Function }) {
     const {
         avatarID,
-        avatarURL,
         email,
-        features,
-        name
+        features
     } = getLocalParticipant(stateful);
+
+    const avatarURL = getAppProp(stateful, 'avatarURL');
+    const name = getAppProp(stateful, 'displayName');
+    const userId = getAppProp(stateful, 'userId');
 
     avatarID && conference.sendCommand(AVATAR_ID_COMMAND, {
         value: avatarID
@@ -322,10 +326,16 @@ export function sendLocalParticipant(
     email && conference.sendCommand(EMAIL_COMMAND, {
         value: email
     });
+    userId && conference.sendCommand(USERID_COMMAND, {
+        value: userId
+    });
 
     if (features && features['screen-sharing'] === 'true') {
         conference.setLocalParticipantProperty('features_screen-sharing', true);
     }
+
+    // const str =  tDisplayName + '  ' + (userId || 'aa') + '  ' + (tAvatarURL || 'nn');
+    // alert(str);
 
     conference.setDisplayName(name);
 }

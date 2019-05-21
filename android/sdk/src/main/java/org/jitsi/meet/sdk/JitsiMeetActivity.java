@@ -196,4 +196,9 @@ public class JitsiMeetActivity extends FragmentActivity
     public void onConferenceWillJoin(Map<String, Object> data) {
         Log.d(TAG, "Conference will join: " + data);
     }
+
+    @Override
+    public void enterInvite(Map<String, Object> data) {
+        Log.d(TAG, "new member join: " + data);
+    }
 }
