@@ -101,7 +101,11 @@
 }
 
 - (void)enterInvite:(NSDictionary *)user {
-    NSLog(@"enterInvite");
+    NSLog(@"enterInvite : %@", user);
+}
+
+- (void)participantLeft:(NSDictionary *)data {
+    NSLog(@"participantLeft : %@", data);
 }
 
 @end

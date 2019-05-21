@@ -8,7 +8,11 @@ import {
     JITSI_CONFERENCE_URL_KEY,
     SET_ROOM,
     forEachConference,
-    isRoomValid
+    isRoomValid,
+    USER_JOINED,
+    USER_LEFT,
+    USER_STATUS_CHANGED,
+    PARTICIPANT_CONN_STATUS_CHANGED
 } from '../../base/conference';
 import { LOAD_CONFIG_ERROR } from '../../base/config';
 import {
@@ -22,6 +26,18 @@ import { toURLString } from '../../base/util';
 import { ENTER_PICTURE_IN_PICTURE } from '../picture-in-picture';
 
 import { sendEvent } from './functions';
+
+import { getParticipantCount } from '../../base/participants';
+
+import {
+    HIDDEN_PARTICIPANT_JOINED,
+    HIDDEN_PARTICIPANT_LEFT,
+    PARTICIPANT_UPDATED,
+    PARTICIPANT_JOINED,
+    PARTICIPANT_LEFT
+} from '../../base/participants';
+
+// declare var APP: Object;
 
 /**
  * Event which will be emitted on the native side to indicate the conference
@@ -41,6 +57,25 @@ MiddlewareRegistry.register(store => next => action => {
     const { type } = action;
 
     switch (type) {
+    case PARTICIPANT_LEFT: {
+        const memsCount = getParticipantCount(store);
+        alert(memsCount);
+        sendEvent(store, type, {count: memsCount});
+        break;
+    }
+    case PARTICIPANT_JOINED: {
+        // sendEvent(store, type, {count: getParticipantCount(store)});
+        break;
+    }
+    case HIDDEN_PARTICIPANT_JOINED:
+    case HIDDEN_PARTICIPANT_LEFT:
+    case PARTICIPANT_UPDATED:
+    case USER_JOINED:
+    case USER_LEFT:
+    case USER_STATUS_CHANGED:
+    case PARTICIPANT_CONN_STATUS_CHANGED:
+        // console.log('receive listener : ', action);
+        break;
     case CONFERENCE_FAILED: {
         const { error, ...data } = action;
 
