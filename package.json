@@ -126,7 +126,9 @@
   "license": "Apache-2.0",
   "scripts": {
     "lint": "eslint . && flow",
-    "validate": "npm ls"
+    "validate": "npm ls",
+    "iosbundle": "react-native bundle --entry-file index.ios.js --bundle-output ./bundle/index.ios.jsbundle --platform ios --assets-dest ./bundle –dev false",
+    "androidbundle": "react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output ./android/sdk/build/generated/assets/react/index.android.bundle --assets-dest ./android/sdk/build/generated/res/react"
   },
   "browser": {
     "jQuery-Impromptu": "jQuery-Impromptu/src/jquery-impromptu.js"
