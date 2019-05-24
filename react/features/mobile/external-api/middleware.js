@@ -59,7 +59,7 @@ MiddlewareRegistry.register(store => next => action => {
     switch (type) {
     case PARTICIPANT_LEFT: {
         const memsCount = getParticipantCount(store);
-        alert(memsCount);
+        // alert(memsCount);
         sendEvent(store, type, {count: memsCount});
         break;
     }

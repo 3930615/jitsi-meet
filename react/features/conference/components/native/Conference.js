@@ -284,7 +284,6 @@ class Conference extends AbstractConference<Props, *> {
                     pointerEvents = 'box-none'
                     style = { styles.toolboxAndFilmstripContainer }>
 
-                    <Labels />
 
                     <Captions onPress = { this._onClick } />
 
@@ -310,7 +309,7 @@ class Conference extends AbstractConference<Props, *> {
                 <SafeAreaView
                     pointerEvents = 'box-none'
                     style = { styles.navBarSafeView }>
-                    <NavigationBar />
+                    {/*<NavigationBar />*/}
                     { this.renderNotificationsContainer() }
                 </SafeAreaView>
 

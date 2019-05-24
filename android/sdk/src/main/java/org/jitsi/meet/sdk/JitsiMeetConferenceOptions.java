@@ -70,6 +70,8 @@ public class JitsiMeetConferenceOptions implements Parcelable {
 
     private String avatarURL;
 
+    private boolean inviteEnabled;
+
     /**
      * Class used to build the immutable {@link JitsiMeetConferenceOptions} object.
      */
@@ -91,6 +93,8 @@ public class JitsiMeetConferenceOptions implements Parcelable {
         private String userId;
 
         private String avatarURL;
+
+        private boolean inviteEnabled;
 
         public Builder() {
         }
@@ -205,6 +209,12 @@ public class JitsiMeetConferenceOptions implements Parcelable {
             return this;
         }
 
+        public Builder setInviteEnabled(boolean enabled) {
+            this.inviteEnabled = enabled;
+
+            return this;
+        }
+
         /**
          * Builds the immutable {@link JitsiMeetConferenceOptions} object with the configuration
          * that this {@link Builder} instance specified.
@@ -225,6 +235,7 @@ public class JitsiMeetConferenceOptions implements Parcelable {
             options.avatarURL = this.avatarURL;
             options.displayName = this.displayName;
             options.userId = this.userId;
+            options.inviteEnabled = this.inviteEnabled;
             return options;
         }
     }
@@ -248,6 +259,8 @@ public class JitsiMeetConferenceOptions implements Parcelable {
         displayName = in.readString();
         userId = in.readString();
         avatarURL = in.readString();
+        byte tempInviteEnabled = in.readByte();
+        inviteEnabled = tempInviteEnabled == 1;
     }
 
     Bundle asProps() {
@@ -272,6 +285,8 @@ public class JitsiMeetConferenceOptions implements Parcelable {
         if (avatarURL != null) {
             props.putString("avatarURL", avatarURL);
         }
+
+        props.putBoolean("inviteEnabled", inviteEnabled);
 
         // TODO: get rid of this.
         props.putBoolean("pictureInPictureEnabled", true);
@@ -340,6 +355,7 @@ public class JitsiMeetConferenceOptions implements Parcelable {
         dest.writeString(displayName);
         dest.writeString(userId);
         dest.writeString(avatarURL);
+        dest.writeByte((byte)(inviteEnabled ? 1 : 2));
     }
 
     @Override

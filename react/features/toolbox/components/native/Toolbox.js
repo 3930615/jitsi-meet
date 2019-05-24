@@ -7,8 +7,10 @@ import { Container } from '../../../base/react';
 import { ColorSchemeRegistry } from '../../../base/color-scheme';
 import { connect } from '../../../base/redux';
 import { StyleType } from '../../../base/styles';
+import { getAppProp } from '../../../base/app';
 
-import { isToolboxVisible } from '../../functions';
+import { isToolboxVisible, enterInvite } from '../../functions';
+
 import { HANGUP_BUTTON_SIZE } from '../../constants';
 
 import AudioMuteButton from '../AudioMuteButton';
@@ -57,7 +59,8 @@ type Props = {
     /**
      * The redux {@code dispatch} function.
      */
-    dispatch: Function
+    dispatch: Function,
+    _addPeopleEnabled: boolean,
 };
 
 /**
@@ -205,7 +208,7 @@ class Toolbox extends Component<Props, State> {
      * @returns {React$Node}
      */
     _renderToolbar() {
-        const { _styles } = this.props;
+        const { _styles, _addPeopleEnabled } = this.props;
         const buttonSize = this._calculateButtonSize();
         let { buttonStyles, toggledButtonStyles } = _styles;
 
@@ -237,12 +240,12 @@ class Toolbox extends Component<Props, State> {
             // toolbar.
             return null;
         }
-
         return (
             <View
                 pointerEvents = 'box-none'
                 style = { styles.toolbar }>
                 <InviteButton
+                    // _addPeopleEnabled = { enterInvite() }
                     styles = { buttonStyles }
                     toggledStyles = { toggledButtonStyles } />
                 <AudioMuteButton
