@@ -41,8 +41,6 @@ dependencies {
 
     api 'com.facebook.react:react-native:+'
 
-    implementation 'com.dropbox.core:dropbox-core-sdk:3.0.8'
-
     if (!rootProject.ext.libreBuild) {
         implementation 'com.amplitude:android-sdk:2.14.1'
         implementation(project(":react-native-google-signin")) {

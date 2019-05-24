@@ -187,16 +187,22 @@ public class JitsiMeetConferenceOptions implements Parcelable {
             return this;
         }
 
-        public void setDisplayName(String displayName) {
+        public Builder setDisplayName(String displayName) {
             this.displayName = displayName;
+
+            return this;
         }
 
-        public void setUserId(String userId) {
+        public Builder setUserId(String userId) {
             this.userId = userId;
+
+            return this;
         }
 
-        public void setAvatarURL(String avatarURL) {
+        public Builder setAvatarURL(String avatarURL) {
             this.avatarURL = avatarURL;
+
+            return this;
         }
 
         /**
