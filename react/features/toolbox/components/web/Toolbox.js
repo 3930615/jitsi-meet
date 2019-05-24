@@ -1180,33 +1180,6 @@ class Toolbox extends Component<Props, State> {
                 <div className = 'button-group-left'>
                     { buttonsLeft.indexOf('desktop') !== -1
                         && this._renderDesktopSharingButton() }
-                    { buttonsLeft.indexOf('raisehand') !== -1
-                        && <ToolbarButton
-                            accessibilityLabel =
-                                {
-                                    t('toolbar.accessibilityLabel.raiseHand')
-                                }
-                            iconName = { _raisedHand
-                                ? 'icon-raised-hand toggled'
-                                : 'icon-raised-hand' }
-                            onClick = { this._onToolbarToggleRaiseHand }
-                            tooltip = { t('toolbar.raiseHand') } /> }
-                    { buttonsLeft.indexOf('chat') !== -1
-                        && <div className = 'toolbar-button-with-badge'>
-                            <ToolbarButton
-                                accessibilityLabel =
-                                    { t('toolbar.accessibilityLabel.chat') }
-                                iconName = { _chatOpen
-                                    ? 'icon-chat toggled'
-                                    : 'icon-chat' }
-                                onClick = { this._onToolbarToggleChat }
-                                tooltip = { t('toolbar.chat') } />
-                            <ChatCounter />
-                        </div> }
-                    {
-                        buttonsLeft.indexOf('closedcaptions') !== -1
-                            && <ClosedCaptionButton />
-                    }
                 </div>
                 <div className = 'button-group-center'>
                     <AudioMuteButton
@@ -1225,27 +1198,7 @@ class Toolbox extends Component<Props, State> {
                     }
                     { buttonsRight.indexOf('tileview') !== -1
                         && <TileViewButton /> }
-                    { buttonsRight.indexOf('invite') !== -1
-                        && <ToolbarButton
-                            accessibilityLabel =
-                                { t('toolbar.accessibilityLabel.invite') }
-                            iconName = 'icon-invite'
-                            onClick = { this._onToolbarOpenInvite }
-                            tooltip = { t('toolbar.invite') } /> }
-                    {
-                        buttonsRight.indexOf('info') !== -1
-                            && <InfoDialogButton />
-                    }
-                    { buttonsRight.indexOf('overflowmenu') !== -1
-                        && <OverflowMenuButton
-                            isOpen = { _overflowMenuVisible }
-                            onVisibilityChange = { this._onSetOverflowVisible }>
-                            <ul
-                                aria-label = { t(toolbarAccLabel) }
-                                className = 'overflow-menu'>
-                                { overflowMenuContent }
-                            </ul>
-                        </OverflowMenuButton> }
+
                 </div>
             </div>);
     }

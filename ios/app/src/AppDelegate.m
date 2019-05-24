@@ -42,12 +42,16 @@
     JitsiMeet *jitsiMeet = [JitsiMeet sharedInstance];
 
     jitsiMeet.conferenceActivityType = JitsiMeetConferenceActivityType;
-    jitsiMeet.customUrlScheme = @"org.jitsi.meet";
-    jitsiMeet.universalLinkDomains = @[@"meet.jit.si", @"alpha.jitsi.net", @"beta.meet.jit.si"];
+//    jitsiMeet.customUrlScheme = @"org.jitsi.meet";
+    jitsiMeet.universalLinkDomains = @[@"10.6.20.148"];
 
     jitsiMeet.defaultConferenceOptions = [JitsiMeetConferenceOptions fromBuilder:^(JitsiMeetConferenceOptionsBuilder *builder) {
-        builder.serverURL = [NSURL URLWithString:@"https://meet.jit.si"];
+        builder.serverURL = [NSURL URLWithString:@"http://10.6.20.148"];
         builder.welcomePageEnabled = YES;
+      
+        builder.displayName = @"fan pro";
+        builder.userId = @"12";
+        builder.avatarURL = @"http://10.6.5.184:8089/avatar/t/47/10047.jpg";
     }];
 
     [jitsiMeet application:application didFinishLaunchingWithOptions:launchOptions];
