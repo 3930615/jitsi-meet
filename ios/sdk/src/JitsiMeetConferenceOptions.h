@@ -35,7 +35,7 @@
 @property (nonatomic, copy, nullable) NSString *userId;
 @property (nonatomic, copy, nullable) NSString *avatarURL;
 
-
+@property (nonatomic) BOOL inviteEnabled;
 /**
  * Color scheme override, see:
  * https://github.com/jitsi/jitsi-meet/blob/master/react/features/base/color-scheme/defaultScheme.js
@@ -67,6 +67,7 @@
 @property (nonatomic, copy, nullable) NSString *displayName;
 @property (nonatomic, copy, nullable) NSString *userId;
 @property (nonatomic, copy, nullable) NSString *avatarURL;
+@property (nonatomic) BOOL inviteEnabled;
 
 @property (nonatomic, copy, nullable) NSDictionary *colorScheme;
 

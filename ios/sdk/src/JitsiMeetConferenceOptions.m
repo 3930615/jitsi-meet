@@ -41,6 +41,7 @@
         _audioOnly = nil;
         _audioMuted = nil;
         _videoMuted = nil;
+        _inviteEnabled = false;
 
         _welcomePageEnabled = nil;
     }
@@ -143,6 +144,7 @@
         _userId = builder.userId;
         _displayName = builder.displayName;
         _avatarURL = builder.avatarURL;
+        _inviteEnabled = builder.inviteEnabled;
 
         _colorScheme = builder.colorScheme;
 
@@ -186,7 +188,8 @@
     if (_avatarURL != nil) {
         props[@"avatarURL"] = self.avatarURL;
     }
-    
+    props[@"inviteEnabled"] = @(self.inviteEnabled);
+
     NSMutableDictionary *config = [[NSMutableDictionary alloc] init];
     if (_audioOnly != nil) {
         config[@"startAudioOnly"] = @(self.audioOnly);
