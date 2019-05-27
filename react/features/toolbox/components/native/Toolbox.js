@@ -15,6 +15,7 @@ import { HANGUP_BUTTON_SIZE } from '../../constants';
 
 import AudioMuteButton from '../AudioMuteButton';
 import HangupButton from '../HangupButton';
+import InviteButton from '../InviteButton';
 
 // import OverflowMenuButton from './OverflowMenuButton';
 import styles from './styles';
@@ -22,7 +23,7 @@ import VideoMuteButton from '../VideoMuteButton';
 
 import ToggleCameraButton from './ToggleCameraButton';
 // import { InviteButton } from '../../../mobile/invite';
-import { InviteButton } from '../../../invite';
+// import { InviteButton } from '../../../invite';
 
 /**
  * The number of buttons other than {@link HangupButton} to render in
@@ -59,8 +60,7 @@ type Props = {
     /**
      * The redux {@code dispatch} function.
      */
-    dispatch: Function,
-    _addPeopleEnabled: boolean,
+    dispatch: Function
 };
 
 /**
@@ -208,7 +208,7 @@ class Toolbox extends Component<Props, State> {
      * @returns {React$Node}
      */
     _renderToolbar() {
-        const { _styles, _addPeopleEnabled } = this.props;
+        const { _styles } = this.props;
         const buttonSize = this._calculateButtonSize();
         let { buttonStyles, toggledButtonStyles } = _styles;
 
@@ -245,7 +245,6 @@ class Toolbox extends Component<Props, State> {
                 pointerEvents = 'box-none'
                 style = { styles.toolbar }>
                 <InviteButton
-                    // _addPeopleEnabled = { enterInvite() }
                     styles = { buttonStyles }
                     toggledStyles = { toggledButtonStyles } />
                 <AudioMuteButton

@@ -2,6 +2,8 @@
 
 import { toState } from '../base/redux';
 import { getAppProp } from '../base/app';
+import { sendEvent } from '../mobile/external-api';
+import { getParticipantsUserInfo } from '../base/participants';
 
 /**
  * Returns true if the toolbox is visible.
@@ -20,6 +22,11 @@ export function isToolboxVisible(stateful: Object | Function) {
 export function enterInvite() {
 
     return (dispatch: Dispatch<any>, getState: Function) => {
+
+        const members = getParticipantsUserInfo(getState);
+        console.log('members : ', members);
+        sendEvent(getState, 'ENTER_INVITE', {members});
+
         // XXX At the time of this writing this action can only be dispatched by
         // the button which is on the conference view, which means that it's
         // fine to enter PiP mode.
