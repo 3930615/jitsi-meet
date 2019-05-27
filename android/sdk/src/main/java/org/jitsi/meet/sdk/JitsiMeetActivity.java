@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.facebook.react.modules.core.PermissionListener;
 
@@ -198,7 +199,19 @@ public class JitsiMeetActivity extends FragmentActivity
     }
 
     @Override
-    public void enterInvite(Map<String, Object> data) {
+    public void onEnterInvite(Map<String, Object> data) {
         Log.d(TAG, "new member join: " + data);
+
+        Toast.makeText(this, "enterInvite回调了", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onParticipantJoined(Map<String, Object> data) {
+        Toast.makeText(this, "participantJoined回调了", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onParticipantLeft(Map<String, Object> data) {
+        Toast.makeText(this, "participantLeft回调了", Toast.LENGTH_SHORT).show();
     }
 }

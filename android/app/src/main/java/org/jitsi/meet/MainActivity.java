@@ -91,7 +91,8 @@ public class MainActivity extends JitsiMeetActivity {
             = new JitsiMeetConferenceOptions.Builder()
                 .setWelcomePageEnabled(true)
                 .setServerURL(buildURL("http://10.6.20.148"))
-                .setInviteEnabled(false)
+                .setInviteEnabled(true)
+                .setAvatarURL("http://10.6.5.184:8089/avatar/t/47/10047.jpg")
                 .build();
         JitsiMeet.setDefaultConferenceOptions(defaultOptions);
 
