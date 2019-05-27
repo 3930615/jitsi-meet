@@ -36,15 +36,16 @@ export function getAvatarURL({ avatarID, avatarURL, email, id }: {
         email: string,
         id: string
 }) {
+    // If an avatarURL is specified, then obviously there's nothing to generate.
+    if (avatarURL) {
+        return avatarURL;
+    }
+    return DEFAULT_AVATAR_RELATIVE_PATH;
+
     // If disableThirdPartyRequests disables third-party avatar services, we are
     // restricted to a stock image of ours.
     if (typeof config === 'object' && config.disableThirdPartyRequests) {
         return DEFAULT_AVATAR_RELATIVE_PATH;
-    }
-
-    // If an avatarURL is specified, then obviously there's nothing to generate.
-    if (avatarURL) {
-        return avatarURL;
     }
 
     // The deployment is allowed to choose the avatar service which is to
