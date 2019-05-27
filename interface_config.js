@@ -17,7 +17,7 @@ var interfaceConfig = {
     DEFAULT_REMOTE_DISPLAY_NAME: '',
     DEFAULT_LOCAL_DISPLAY_NAME: '',
     SHOW_JITSI_WATERMARK: false,
-    JITSI_WATERMARK_LINK: '',
+    JITSI_WATERMARK_LINK: 'https://jitsi.org',
 
     // if watermark is disabled by default, it can be shown only for guests
     SHOW_WATERMARK_FOR_GUESTS: false,
@@ -25,11 +25,10 @@ var interfaceConfig = {
     BRAND_WATERMARK_LINK: '',
     SHOW_POWERED_BY: false,
     SHOW_DEEP_LINKING_IMAGE: false,
-    GENERATE_ROOMNAMES_ON_WELCOME_PAGE: false,
-    DISPLAY_WELCOME_PAGE_CONTENT: false,
+    GENERATE_ROOMNAMES_ON_WELCOME_PAGE: true,
+    DISPLAY_WELCOME_PAGE_CONTENT: true,
     APP_NAME: 'Jitsi Meet',
     NATIVE_APP_NAME: 'Jitsi Meet',
-    PROVIDER_NAME: 'Jitsi',
     LANG_DETECTION: false, // Allow i18n to detect the system language
     INVITATION_POWERED_BY: true,
 
@@ -155,6 +154,11 @@ var interfaceConfig = {
     CONNECTION_INDICATOR_DISABLED: false,
 
     /**
+     * The name of the application connected to the "Add people" search service.
+     */
+    // ADD_PEOPLE_APP_NAME: "",
+
+    /**
      * If true, hides the video quality label indicating the resolution status
      * of the current large video.
      *
@@ -193,20 +197,7 @@ var interfaceConfig = {
     /**
      * Specify the Android app package name.
      */
-    // ANDROID_APP_PACKAGE: 'org.jitsi.meet',
-
-    /**
-     * A UX mode where the last screen share participant is automatically
-     * pinned. Note: this mode is experimental and subject to breakage.
-     */
-    // AUTO_PIN_LATEST_SCREEN_SHARE: false,
-
-    /**
-     * Override the behavior of some notifications to remain displayed until
-     * explicitly dismissed through a user action. The value is how long, in
-     * milliseconds, those notifications should remain displayed.
-     */
-    // ENFORCE_NOTIFICATION_AUTO_DISMISS_TIMEOUT: 15000,
+    // ANDROID_APP_PACKAGE: 'org.jitsi.meet'
 };
 
 /* eslint-enable no-unused-vars, no-var, max-len */
