@@ -6,7 +6,7 @@ import { connect } from '../../base/redux';
 import { AbstractInviteButton } from '../../base/toolbox';
 import type { AbstractButtonProps } from '../../base/toolbox';
 
-// import { getAppProp } from '../../base/app';
+import { getAppProp } from '../../base/app';
 import { enterInvite } from '../functions';
 
 /**
@@ -34,6 +34,9 @@ class InviteButton extends AbstractInviteButton<Props, *> {
     iconName = 'icon-link';
     label = 'toolbar.shareRoom';
 
+    // accessibilityLabel = 'toolbar.accessibilityLabel.videomute';
+    // label = 'toolbar.videomute';
+    tooltip = 'toolbar.shareRoom';
     /**
      * Helper function to perform the actual hangup action.
      *
