@@ -18,6 +18,7 @@ package org.jitsi.meet.sdk;
 
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
+import com.facebook.react.bridge.ReadableType;
 import com.facebook.react.bridge.UiThreadUtil;
 
 import java.lang.reflect.InvocationTargetException;
@@ -157,8 +158,18 @@ public final class ListenerUtils {
         for (ReadableMapKeySetIterator i = readableMap.keySetIterator();
                 i.hasNextKey();) {
             String key = i.nextKey();
-
-            hashMap.put(key, readableMap.getString(key));
+            ReadableType type = readableMap.getType(key);
+            if (type == ReadableType.String){
+                hashMap.put(key, readableMap.getString(key));
+            } else if (type == ReadableType.Number){
+                hashMap.put(key, readableMap.getInt(key));
+            } else if (type == ReadableType.Boolean){
+                hashMap.put(key, readableMap.getBoolean(key));
+            } else if (type == ReadableType.Array){
+                hashMap.put(key, readableMap.getArray(key));
+            } else if (type == ReadableType.Map){
+                hashMap.put(key, readableMap.getMap(key));
+            }
         }
 
         return hashMap;
