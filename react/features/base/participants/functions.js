@@ -13,6 +13,7 @@ import {
     MAX_DISPLAY_NAME_LENGTH,
     PARTICIPANT_ROLE
 } from './constants';
+import { getAppProp } from '../app';
 
 declare var config: Object;
 declare var interfaceConfig: Object;
@@ -36,7 +37,6 @@ export function getAvatarURL({ avatarID, avatarURL, email, id }: {
         email: string,
         id: string
 }) {
-    
     // If disableThirdPartyRequests disables third-party avatar services, we are
     // restricted to a stock image of ours.
     if (typeof config === 'object' && config.disableThirdPartyRequests) {
@@ -184,15 +184,20 @@ export function getParticipantDisplayName(
         }
 
         if (participant.local) {
+            // @todo 此处需要调整
+            const name = getAppProp(stateful, 'displayName');
+            if (name) {
+                return name;
+            }
+
             return typeof interfaceConfig === 'object'
                 ? interfaceConfig.DEFAULT_LOCAL_DISPLAY_NAME
-                : 'me';
+                : '';
         }
     }
-
     return typeof interfaceConfig === 'object'
         ? interfaceConfig.DEFAULT_REMOTE_DISPLAY_NAME
-        : 'Fellow Jitster';
+        : '';
 }
 
 /**
