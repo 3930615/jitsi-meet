@@ -56,11 +56,13 @@ MiddlewareRegistry.register(store => next => action => {
     const result = next(action);
     const { type } = action;
 
+    var partLeft = false;
+    var selfLeft = false;
+
     switch (type) {
     case PARTICIPANT_LEFT: {
-        const memsCount = getParticipantCount(store);
-        // alert(memsCount);
-        sendEvent(store, type, {count: memsCount});
+        console.log('left : ', store);
+        partLeft = true;
         break;
     }
     case PARTICIPANT_JOINED: {
@@ -98,7 +100,12 @@ MiddlewareRegistry.register(store => next => action => {
     }
 
     case CONFERENCE_JOINED:
-    case CONFERENCE_LEFT:
+    case CONFERENCE_LEFT: {
+        selfLeft = true;
+        const memsCount = getParticipantCount(store);
+        _sendConferenceLeftEvent(store, action, {count: memsCount});
+    }
+        break;
     case CONFERENCE_WILL_JOIN:
         _sendConferenceEvent(store, action);
         break;
@@ -151,6 +158,10 @@ MiddlewareRegistry.register(store => next => action => {
         break;
     }
 
+    if (partLeft && !selfLeft) {
+        const memsCount = getParticipantCount(store);
+        sendEvent(store, type, {count: memsCount});
+    }
     return result;
 });
 
@@ -238,6 +249,45 @@ function _sendConferenceEvent(
     default:
         type_ = type;
         break;
+    }
+
+    sendEvent(store, type_, data);
+}
+
+function _sendConferenceLeftEvent(
+    store: Object,
+    action: {
+        conference: Object,
+        type: string,
+        url: ?string
+    }, res) {
+    const { conference, type, ...data } = action;
+
+    // For these (redux) actions, conference identifies a JitsiConference
+    // instance. The external API cannot transport such an object so we have to
+    // transport an "equivalent".
+    if (conference) {
+        data.url = toURLString(conference[JITSI_CONFERENCE_URL_KEY]);
+    }
+
+    if (res) {
+        data.count = res.count;
+    }
+
+    if (_swallowEvent(store, action, data)) {
+        return;
+    }
+
+    let type_;
+
+    switch (type) {
+        case CONFERENCE_FAILED:
+        case CONFERENCE_LEFT:
+            type_ = CONFERENCE_TERMINATED;
+            break;
+        default:
+            type_ = type;
+            break;
     }
 
     sendEvent(store, type_, data);
