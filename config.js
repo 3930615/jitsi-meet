@@ -16,35 +16,35 @@ var config = {
 
     hosts: {
         // XMPP domain.
-        domain: 'jitsi-meet.example.com',
+        domain: 'meet.jitsi',
 
         // When using authentication, domain for guest users.
         // anonymousdomain: 'guest.example.com',
 
         // Domain for authenticated users. Defaults to <domain>.
-        // authdomain: 'jitsi-meet.example.com',
+        // authdomain: 'meet.jitsi',
 
         // Jirecon recording component domain.
-        // jirecon: 'jirecon.jitsi-meet.example.com',
+        // jirecon: 'jirecon.meet.jitsi',
 
         // Call control component (Jigasi).
-        // call_control: 'callcontrol.jitsi-meet.example.com',
+        // call_control: 'callcontrol.meet.jitsi',
 
         // Focus component domain. Defaults to focus.<domain>.
-        focus: 'focus.jitsi-meet.example.com',
+        // focus: 'focus.meet.jitsi',
 
         // XMPP MUC domain. FIXME: use XEP-0030 to discover it.
-        muc: 'conference.jitsi-meet.example.com'
+        muc: 'muc.meet.jitsi',
     },
 
     // BOSH URL. FIXME: use XEP-0156 to discover it.
-    bosh: '//jitsi-meet.example.com/http-bind',
+    bosh: '/http-bind',
 
     // The name of client node advertised in XEP-0115 'c' stanza
     clientNode: 'http://jitsi.org/jitsimeet',
 
     // The real JID of focus participant - can be overridden here
-    // focusUserJid: 'focus@auth.jitsi-meet.example.com',
+    focusUserJid: 'focus@auth.meet.jitsi',
 
 
     // Testing / experimental features.
@@ -84,7 +84,7 @@ var config = {
     // startAudioOnly: false,
 
     // Every participant after the Nth will start audio muted.
-    startAudioMuted: 10,
+    // startAudioMuted: 10,
 
     // Start calls with audio muted. Unlike the option above, this one is only
     // applied locally. FIXME: having these 2 options is confusing.
@@ -93,23 +93,23 @@ var config = {
     // Video
 
     // Sets the preferred resolution (height) for local video. Defaults to 720.
-    resolution: 720,
+    // resolution: 720,
 
     // w3c spec-compliant video constraints to use for video capture. Currently
     // used by browsers that return true from lib-jitsi-meet's
     // util#browser#usesNewGumFlow. The constraints are independency from
     // this config's resolution value. Defaults to requesting an ideal aspect
     // ratio of 16:9 with an ideal resolution of 720.
-    constraints: {
-        video: {
-            aspectRatio: 16 / 9,
-            height: {
-                ideal: 720,
-                max: 720,
-                min: 360
-            }
-        }
-    },
+    // constraints: {
+    //     video: {
+    //         aspectRatio: 16 / 9,
+    //         height: {
+    //             ideal: 720,
+    //             max: 720,
+    //             min: 240
+    //         }
+    //     }
+    // },
 
     // Enable / disable simulcast support.
     // disableSimulcast: false,
@@ -124,7 +124,7 @@ var config = {
     disableSuspendVideo: true,
 
     // Every participant after the Nth will start video muted.
-    startVideoMuted: 10,
+    // startVideoMuted: 10,
 
     // Start calls with video muted. Unlike the option above, this one is only
     // applied locally. FIXME: having these 2 options is confusing.
@@ -170,18 +170,18 @@ var config = {
     // Recording
 
     // Whether to enable file recording or not.
-    fileRecordingsEnabled: false,
+    // fileRecordingsEnabled: false,
     // Enable the dropbox integration.
     // dropbox: {
     //     appKey: '<APP_KEY>' // Specify your app key here.
     // },
 
     // Whether to enable live streaming or not.
-    liveStreamingEnabled: true,
+    // liveStreamingEnabled: false,
 
     // Transcription (in interface_config,
     // subtitles and buttons can be configured)
-    transcribingEnabled: false,
+    // transcribingEnabled: false,
 
     // Misc
 
@@ -209,10 +209,10 @@ var config = {
     // minParticipants: 2,
 
     // Use XEP-0215 to fetch STUN and TURN servers.
-    useStunTurn: true,
+    // useStunTurn: true,
 
     // Enable IPv6 support.
-    useIPv6: false,
+    // useIPv6: true,
 
     // Enables / disables a data communication channel with the Videobridge.
     // Values can be 'datachannel', 'websocket', true (treat it as
@@ -225,24 +225,24 @@ var config = {
     //
 
     // Use display name as XMPP nickname.
-    useNicks: false,
+    // useNicks: false,
 
     // Require users to always specify a display name.
-    requireDisplayName: false,
+    // requireDisplayName: true,
 
     // Whether to use a welcome page or not. In case it's false a random room
     // will be joined when no room is specified.
-    enableWelcomePage: false,
+    enableWelcomePage: true,
 
     // Enabling the close page will ignore the welcome page redirection when
     // a call is hangup.
-    enableClosePage: true,
+    // enableClosePage: false,
 
     // Disable hiding of remote thumbnails when in a 1-on-1 conference call.
-    disable1On1Mode: true,
+    // disable1On1Mode: false,
 
     // Default language for the user interface.
-    defaultLanguage: 'zh-cn',
+    defaultLanguage: 'zhCN',
 
     // If true all users without a token will be considered guests and all users
     // with token will be considered non-guests. Only guests will be allowed to
@@ -258,7 +258,7 @@ var config = {
 
     // Enables calendar integration, depends on googleApiApplicationClientID
     // and microsoftApiApplicationClientID
-    enableCalendarIntegration: false,
+    // enableCalendarIntegration: false,
 
     // Stats
     //
@@ -288,7 +288,7 @@ var config = {
     // If third party requests are disabled, no other server will be contacted.
     // This means avatars will be locally generated and callstats integration
     // will not function.
-    disableThirdPartyRequests: true,
+    // disableThirdPartyRequests: false,
 
 
     // Peer-To-Peer mode: used (if enabled) when there are just 2 participants.
@@ -304,7 +304,7 @@ var config = {
         enabled: true,
 
         // Use XEP-0215 to fetch STUN and TURN servers.
-        useStunTurn: true,
+        // useStunTurn: true,
 
         // The STUN servers that will be used in the peer to peer connections
         stunServers: [
@@ -327,11 +327,11 @@ var config = {
 
         // If set to true, disable H.264 video codec by stripping it out of the
         // SDP.
-        disableH264: true,
+        // disableH264: false,
 
         // How long we're going to wait, before going back to P2P after the 3rd
         // participant has left the conference (to filter out page reload).
-        backToP2PDelay: 5
+        // backToP2PDelay: 5
     },
 
     analytics: {
@@ -351,32 +351,28 @@ var config = {
     // Information about the jitsi-meet instance we are connecting to, including
     // the user region as seen by the server.
     deploymentInfo: {
-        environment: 'hcv-meetjitsi',
-        envType: 'prod',
-        releaseNumber: '83',
-        shard: 'hcv-meetjitsi-ap-se-1a-s2',
-        region: 'ap-southeast-1',
-        userRegion: 'ap-southeast-1',
-        crossRegion: (!'ap-southeast-1' || 'ap-southeast-1' === 'ap-southeast-1') ? 0 : 1
+        // shard: "shard1",
+        // region: "europe",
+        // userRegion: "asia"
     }
 
     // Local Recording
     //
 
-    localRecording: {
+    // localRecording: {
     // Enables local recording.
     // Additionally, 'localrecording' (all lowercase) needs to be added to
     // TOOLBAR_BUTTONS in interface_config.js for the Local Recording
     // button to show up on the toolbar.
     //
-        enabled: false,
+    //     enabled: true,
     //
 
     // The recording format, can be one of 'ogg', 'flac' or 'wav'.
     //     format: 'flac'
     //
 
-    }
+    // }
 
     // Options related to end-to-end (participant to participant) ping.
     // e2eping: {
