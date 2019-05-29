@@ -56,13 +56,10 @@ MiddlewareRegistry.register(store => next => action => {
     const result = next(action);
     const { type } = action;
 
-    var partLeft = false;
-    var selfLeft = false;
-
     switch (type) {
     case PARTICIPANT_LEFT: {
-        console.log('left : ', store);
-        partLeft = true;
+        const memsCount = getParticipantCount(store);
+        sendEvent(store, type, {count: memsCount});
         break;
     }
     case PARTICIPANT_JOINED: {
@@ -101,9 +98,7 @@ MiddlewareRegistry.register(store => next => action => {
 
     case CONFERENCE_JOINED:
     case CONFERENCE_LEFT: {
-        selfLeft = true;
-        const memsCount = getParticipantCount(store);
-        _sendConferenceLeftEvent(store, action, {count: memsCount});
+        _sendConferenceEvent(store, action);
     }
         break;
     case CONFERENCE_WILL_JOIN:
@@ -158,10 +153,6 @@ MiddlewareRegistry.register(store => next => action => {
         break;
     }
 
-    if (partLeft && !selfLeft) {
-        const memsCount = getParticipantCount(store);
-        sendEvent(store, type, {count: memsCount});
-    }
     return result;
 });
 
