@@ -30,7 +30,7 @@ export default {
      */
     dismissIcon: {
         color: ColorPalette.white,
-        fontSize: 10,
+        fontSize: 0.1,
         padding: 1.5 * BoxModel.padding
     },
 

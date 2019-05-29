@@ -14,7 +14,7 @@ import React, { PureComponent } from 'react';
 import { AppRegistry } from 'react-native';
 
 import { App } from './features/app';
-import { IncomingCallApp } from './features/mobile/incoming-call';
+// import { IncomingCallApp } from './features/mobile/incoming-call';
 
 /**
  * The type of the React {@code Component} props of {@link Root}.
@@ -53,4 +53,4 @@ class Root extends PureComponent<Props> {
 AppRegistry.registerComponent('App', () => Root);
 
 // Register the main/root Component of IncomingCallView.
-AppRegistry.registerComponent('IncomingCallApp', () => IncomingCallApp);
+// AppRegistry.registerComponent('IncomingCallApp', () => IncomingCallApp);
