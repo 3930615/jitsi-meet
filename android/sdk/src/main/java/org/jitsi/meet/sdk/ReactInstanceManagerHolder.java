@@ -61,9 +61,9 @@ class ReactInstanceManagerHolder {
                 new WiFiStatsModule(reactContext),
                 new org.jitsi.meet.sdk.net.NAT64AddrInfoModule(reactContext)));
 
-        if (AudioModeModule.useConnectionService()) {
-            nativeModules.add(new RNConnectionService(reactContext));
-        }
+//        if (AudioModeModule.useConnectionService()) {
+//            nativeModules.add(new RNConnectionService(reactContext));
+//        }
 
         try {
             Class<?> amplitudeModuleClass = Class.forName("AmplitudeModule");

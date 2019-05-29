@@ -159,7 +159,8 @@ class AudioModeModule extends ReactContextBaseJavaModule
      * Whether or not the ConnectionService is used for selecting audio devices.
      */
     static boolean useConnectionService() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O;
+        return false;
+//        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O;
     }
 
     /**
@@ -537,9 +538,9 @@ class AudioModeModule extends ReactContextBaseJavaModule
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void setAudioRoute(String audioDevice) {
-        int newAudioRoute = audioDeviceToRouteInt(audioDevice);
-
-        RNConnectionService.setAudioRoute(newAudioRoute);
+//        int newAudioRoute = audioDeviceToRouteInt(audioDevice);
+//
+//        RNConnectionService.setAudioRoute(newAudioRoute);
     }
 
     /**
@@ -738,11 +739,7 @@ class AudioModeModule extends ReactContextBaseJavaModule
         selectedDevice = audioDevice;
         Log.d(TAG, "Selected audio device: " + audioDevice);
 
-        if (useConnectionService()) {
-            setAudioRoute(audioDevice);
-        } else {
-            setAudioRoutePreO(audioDevice);
-        }
+        setAudioRoutePreO(audioDevice);
 
         return true;
     }
