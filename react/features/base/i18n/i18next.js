@@ -39,7 +39,7 @@ export const DEFAULT_LANGUAGE = LANGUAGES[0];
 const options = {
     app:
         (typeof interfaceConfig !== 'undefined' && interfaceConfig.APP_NAME)
-            || 'Jitsi Meet',
+            || 'MOA Meet',
     compatibilityAPI: 'v1',
     compatibilityJSON: 'v1',
     fallbackLng: DEFAULT_LANGUAGE,
