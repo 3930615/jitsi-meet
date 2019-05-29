@@ -30,7 +30,7 @@ export default {
      */
     dismissIcon: {
         color: ColorPalette.white,
-        fontSize: 20,
+        fontSize: 10,
         padding: 1.5 * BoxModel.padding
     },
 
@@ -40,7 +40,7 @@ export default {
     notification: {
         backgroundColor: '#768898',
         flexDirection: 'row',
-        height: 48,
+        height: 24,
         marginTop: 0.5 * BoxModel.margin
     },
 
