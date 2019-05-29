@@ -328,9 +328,9 @@
     "feedback":{
         "average":"平均",
         "bad":"差",
-        "detailsLabel":"Tell us more about it.",
+        "detailsLabel":"请评价您的会议体验",
         "good":"好",
-        "rateExperience":"请评价您的会议体验。",
+        "rateExperience":"请评价您的会议体验",
         "veryBad":"非常差",
         "veryGood":"非常好"
     },
