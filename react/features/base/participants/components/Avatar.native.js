@@ -290,7 +290,7 @@ class AvatarContent extends Component<Props, State> {
         return (
             <Fragment>
                 { source.uri && this._renderAvatar() }
-                { this.useDefaultAvatar && this._renderDefaultAvatar() }
+                {/*{ this.useDefaultAvatar && this._renderDefaultAvatar() }*/}
             </Fragment>
         );
     }

@@ -266,7 +266,6 @@ class ParticipantView extends Component<Props> {
                 alignItems: 'center',
                 flexDirection: 'column'
             },
-            img: {},
             txt: {
                 textAlign: 'center',
                 color: 'white',
