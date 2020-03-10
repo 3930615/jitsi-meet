@@ -30,7 +30,7 @@ export default {
      */
     dismissIcon: {
         color: ColorPalette.white,
-        fontSize: 20,
+        fontSize: 0.1,  //@todo moa modity 20 to 0.1
         padding: 1.5 * BoxModel.padding
     },
 
@@ -40,7 +40,7 @@ export default {
     notification: {
         backgroundColor: '#768898',
         flexDirection: 'row',
-        height: 48,
+        height: 24,  //@todo moa modity 48 to 24
         marginTop: 0.5 * BoxModel.margin
     },
 

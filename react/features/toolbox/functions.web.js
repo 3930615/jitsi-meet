@@ -43,3 +43,19 @@ export function isToolboxVisible(state: Object) {
 
     return Boolean(!iAmSipGateway && (timeoutID || visible || alwaysVisible));
 }
+
+export function enterInvite() {
+
+    return (dispatch: Dispatch<any>, getState: Function) => {
+        //
+        // const members = getParticipantsUserInfo(getState);
+        // alert(111);
+        // console.log('members : ', members);
+        // sendEvent(getState, 'ENTER_INVITE', {members});
+        //
+        // // XXX At the time of this writing this action can only be dispatched by
+        // // the button which is on the conference view, which means that it's
+        // // fine to enter PiP mode.
+        // return getAppProp(getState, 'inviteEnabled')
+    };
+}

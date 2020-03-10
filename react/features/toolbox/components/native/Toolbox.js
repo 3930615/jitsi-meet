@@ -15,8 +15,10 @@ import { isToolboxVisible } from '../../functions';
 
 import AudioMuteButton from '../AudioMuteButton';
 import HangupButton from '../HangupButton';
+import InviteButton from '../InviteButton'; //@todo moa added
+import ToggleCameraButton from './ToggleCameraButton'; //@todo moa added
 
-import OverflowMenuButton from './OverflowMenuButton';
+// import OverflowMenuButton from './OverflowMenuButton'; //@todo moa delete
 import styles from './styles';
 import VideoMuteButton from '../VideoMuteButton';
 
@@ -112,20 +114,9 @@ class Toolbox extends PureComponent<Props> {
             <View
                 pointerEvents = 'box-none'
                 style = { styles.toolbar }>
-                {
-                    _chatEnabled
-                        && <ChatButton
-                            styles = { buttonStylesBorderless }
-                            toggledStyles = {
-                                this._getChatButtonToggledStyle(toggledButtonStyles)
-                            } />
-                }
-                {
-                    !_chatEnabled
-                        && <InfoDialogButton
-                            styles = { buttonStyles }
-                            toggledStyles = { toggledButtonStyles } />
-                }
+                <InviteButton
+                    styles = { buttonStyles }
+                    toggledStyles = { toggledButtonStyles } />
                 <AudioMuteButton
                     styles = { buttonStyles }
                     toggledStyles = { toggledButtonStyles } />
@@ -134,8 +125,8 @@ class Toolbox extends PureComponent<Props> {
                 <VideoMuteButton
                     styles = { buttonStyles }
                     toggledStyles = { toggledButtonStyles } />
-                <OverflowMenuButton
-                    styles = { buttonStylesBorderless }
+                <ToggleCameraButton
+                    styles = { buttonStyles }
                     toggledStyles = { toggledButtonStyles } />
             </View>
         );

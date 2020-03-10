@@ -267,7 +267,7 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
             backend: new PostMessageTransportBackend({
                 postisOptions: {
                     scope: `jitsi_meet_external_api_${id}`,
-                    window: this._frame.contentWindow
+                    window: this._frame//this._frame.contentWindow   @todo moa modify this._frame.contentWindow to this._frame
                 }
             })
         });
@@ -299,6 +299,20 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
     _createIFrame(height, width, onload) {
         const frameName = `jitsiConferenceFrame${id}`;
 
+        this._frame = window.open(this._url, "win", "startWithVideoMuted=true,height=600,width=900,location=no,toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no");
+        this._frame.name = frameName;
+        this._frame.id = frameName;
+        this._frame.allow = 'camera; microphone';
+
+        if (onload) {
+            // waits for iframe resources to load
+            // and fires event when it is done
+            this._frame.onload = onload;
+        }
+
+        /*
+        const frameName = `jitsiConferenceFrame${id}`;
+
         this._frame = document.createElement('iframe');
         this._frame.allow = 'camera; microphone';
         this._frame.src = this._url;
@@ -314,7 +328,7 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
             this._frame.onload = onload;
         }
 
-        this._frame = this._parentNode.appendChild(this._frame);
+        this._frame = this._parentNode.appendChild(this._frame);*/
     }
 
     /**
@@ -323,7 +337,7 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
      * @returns {Array<string>}
      */
     _getAlwaysOnTopResources() {
-        const iframeWindow = this._frame.contentWindow;
+        const iframeWindow = this._frame //this._frame.contentWindow;  @todo moa modify
         const iframeDocument = iframeWindow.document;
         let baseURL = '';
         const base = iframeDocument.querySelector('base');
@@ -358,7 +372,8 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
      */
     _getLargeVideo() {
         const iframe = this.getIFrame();
-
+        //@todo moa modify
+        /*
         if (!this._isLargeVideoVisible
                 || !iframe
                 || !iframe.contentWindow
@@ -367,6 +382,14 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
         }
 
         return iframe.contentWindow.document.getElementById('largeVideo');
+        */
+
+        if (!this._isLargeVideoVisible
+            || !iframe
+            || !iframe.document) {
+            return;
+        }
+        return iframe.document.getElementById('largeVideo');
     }
 
     /**
@@ -597,7 +620,9 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
         this._transport.dispose();
         this.removeAllListeners();
         if (this._frame && this._frame.parentNode) {
-            this._frame.parentNode.removeChild(this._frame);
+            // @todo moa modify
+            // this._frame.parentNode.removeChild(this._frame);
+            this._frame.close();
         }
     }
 

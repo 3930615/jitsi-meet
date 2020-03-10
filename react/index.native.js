@@ -14,7 +14,8 @@ import React, { PureComponent } from 'react';
 import { AppRegistry } from 'react-native';
 
 import { App } from './features/app';
-import { IncomingCallApp } from './features/mobile/incoming-call';
+//@todo moa delete callkit
+// import { IncomingCallApp } from './features/mobile/incoming-call';
 
 // It's crucial that the native loggers are created ASAP, not to lose any data.
 import { _initLogging } from './features/base/logging/functions';
@@ -81,4 +82,5 @@ if (!__DEV__) {
 AppRegistry.registerComponent('App', () => Root);
 
 // Register the main/root Component of IncomingCallView.
-AppRegistry.registerComponent('IncomingCallApp', () => IncomingCallApp);
+//@todo moa delete callkit
+// AppRegistry.registerComponent('IncomingCallApp', () => IncomingCallApp);

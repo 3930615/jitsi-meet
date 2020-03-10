@@ -7,3 +7,7 @@ export { default as AbstractHangupButton } from './AbstractHangupButton';
 export { default as AbstractVideoMuteButton } from './AbstractVideoMuteButton';
 export { default as BetaTag } from './BetaTag';
 export { default as OverflowMenuItem } from './OverflowMenuItem';
+
+//@todo moa added
+export { default as AbstractInviteButton } from './AbstractInviteButton';
+
