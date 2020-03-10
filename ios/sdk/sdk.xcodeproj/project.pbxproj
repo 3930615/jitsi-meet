@@ -25,6 +25,8 @@
 		0BCA49611EC4B6C600B793EE /* Proximity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCA495E1EC4B6C600B793EE /* Proximity.m */; };
 		0BD906EA1EC0C00300C8C18E /* JitsiMeet.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BD906E81EC0C00300C8C18E /* JitsiMeet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0F65EECE1D95DA94561BB47E /* libPods-JitsiMeet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03F2ADC957FF109849B7FCA1 /* libPods-JitsiMeet.a */; };
+		3110C24324176734006D1202 /* MOAUserInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3110C24124176734006D1202 /* MOAUserInfo.h */; };
+		3110C24424176734006D1202 /* MOAUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3110C24224176734006D1202 /* MOAUserInfo.m */; };
 		6C31EDC820C06D490089C899 /* recordingOn.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6C31EDC720C06D490089C899 /* recordingOn.mp3 */; };
 		6C31EDCA20C06D530089C899 /* recordingOff.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6C31EDC920C06D530089C899 /* recordingOff.mp3 */; };
 		75635B0A20751D6D00F29C9F /* joined.wav in Resources */ = {isa = PBXBuildFile; fileRef = 75635B0820751D6D00F29C9F /* joined.wav */; };
@@ -84,6 +86,8 @@
 		0BD906E51EC0C00300C8C18E /* JitsiMeet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JitsiMeet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BD906E81EC0C00300C8C18E /* JitsiMeet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JitsiMeet.h; sourceTree = "<group>"; };
 		0BD906E91EC0C00300C8C18E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3110C24124176734006D1202 /* MOAUserInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MOAUserInfo.h; sourceTree = "<group>"; };
+		3110C24224176734006D1202 /* MOAUserInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MOAUserInfo.m; sourceTree = "<group>"; };
 		6C31EDC720C06D490089C899 /* recordingOn.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = recordingOn.mp3; path = ../../sounds/recordingOn.mp3; sourceTree = "<group>"; };
 		6C31EDC920C06D530089C899 /* recordingOff.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = recordingOff.mp3; path = ../../sounds/recordingOff.mp3; sourceTree = "<group>"; };
 		75635B0820751D6D00F29C9F /* joined.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = joined.wav; path = ../../sounds/joined.wav; sourceTree = "<group>"; };
@@ -223,6 +227,8 @@
 				DEFE535521FB2E8300011A3A /* ReactUtils.m */,
 				0B93EF7C1EC9DDCD0030D24D /* RCTBridgeWrapper.h */,
 				0B93EF7D1EC9DDCD0030D24D /* RCTBridgeWrapper.m */,
+				3110C24124176734006D1202 /* MOAUserInfo.h */,
+				3110C24224176734006D1202 /* MOAUserInfo.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -301,6 +307,7 @@
 				0B412F221EDEF6EA00B1A0A6 /* JitsiMeetViewDelegate.h in Headers */,
 				0BD906EA1EC0C00300C8C18E /* JitsiMeet.h in Headers */,
 				DE81A2D42316AC4D00AE1940 /* JitsiMeetLogger.h in Headers */,
+				3110C24324176734006D1202 /* MOAUserInfo.h in Headers */,
 				DE65AACA2317FFCD00290BEC /* LogUtils.h in Headers */,
 				DEAD3226220C497000E93636 /* JitsiMeetConferenceOptions.h in Headers */,
 			);
@@ -488,6 +495,7 @@
 				0BCA49611EC4B6C600B793EE /* Proximity.m in Sources */,
 				A480429C21EE335600289B73 /* AmplitudeModule.m in Sources */,
 				C69EFA0C209A0F660027712B /* JMCallKitEmitter.swift in Sources */,
+				3110C24424176734006D1202 /* MOAUserInfo.m in Sources */,
 				DEFE535621FB2E8300011A3A /* ReactUtils.m in Sources */,
 				C6A34261204EF76800E062DD /* DragGestureController.swift in Sources */,
 				A4A934E9212F3ADB001E9388 /* Dropbox.m in Sources */,
