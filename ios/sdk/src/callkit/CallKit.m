@@ -18,6 +18,12 @@
 // OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 //
 
+#pragma mark - moa added WITHOUT_CALLKIT
+
+#define WITHOUT_CALLKIT      0
+
+#if WITHOUT_CALLKIT
+
 #import <AVFoundation/AVFoundation.h>
 #import <CallKit/CallKit.h>
 #import <Foundation/Foundation.h>
@@ -344,3 +350,5 @@ RCT_EXPORT_METHOD(updateCall:(NSString *)callUUID
 }
 
 @end
+
+#endif

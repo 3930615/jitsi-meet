@@ -102,4 +102,17 @@
 }
 #endif
 
+#pragma mark - moa added
+- (void)enterInvite:(NSDictionary *)user {
+    NSLog(@"enterInvite : %@", user);
+}
+
+- (void)participantLeft:(NSDictionary *)data {
+    NSLog(@"participantLeft : %@", data);
+}
+
+- (void)participantJoined:(NSDictionary *)data {
+    NSLog(@"participantJoined : %@", data);
+}
+
 @end

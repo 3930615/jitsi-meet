@@ -47,6 +47,7 @@
         builder.serverURL = [NSURL URLWithString:@"https://meet.jit.si"];
         builder.welcomePageEnabled = YES;
 
+      builder.userInfo = [[JitsiMeetUserInfo alloc] initWithDisplayName:@"diaplayNmae" andEmail:@"email" andAvatar:[NSURL URLWithString:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1583832397625&di=79d5bb08d3b350cfcc06114cd88cc3ae&imgtype=0&src=http%3A%2F%2Fa3.att.hudong.com%2F68%2F61%2F300000839764127060614318218_950.jpg"]];
         // Apple rejected our app because they claim requiring a
         // Dropbox account for recording is not acceptable.
 #if DEBUG

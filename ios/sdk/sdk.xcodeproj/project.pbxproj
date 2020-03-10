@@ -25,7 +25,7 @@
 		0BCA49611EC4B6C600B793EE /* Proximity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCA495E1EC4B6C600B793EE /* Proximity.m */; };
 		0BD906EA1EC0C00300C8C18E /* JitsiMeet.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BD906E81EC0C00300C8C18E /* JitsiMeet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0F65EECE1D95DA94561BB47E /* libPods-JitsiMeet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03F2ADC957FF109849B7FCA1 /* libPods-JitsiMeet.a */; };
-		3110C24324176734006D1202 /* MOAUserInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3110C24124176734006D1202 /* MOAUserInfo.h */; };
+		3110C24324176734006D1202 /* MOAUserInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3110C24124176734006D1202 /* MOAUserInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3110C24424176734006D1202 /* MOAUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3110C24224176734006D1202 /* MOAUserInfo.m */; };
 		6C31EDC820C06D490089C899 /* recordingOn.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6C31EDC720C06D490089C899 /* recordingOn.mp3 */; };
 		6C31EDCA20C06D530089C899 /* recordingOff.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6C31EDC920C06D530089C899 /* recordingOff.mp3 */; };
@@ -306,8 +306,8 @@
 				DE65AACC2318028300290BEC /* JitsiMeetBaseLogHandler+Private.h in Headers */,
 				0B412F221EDEF6EA00B1A0A6 /* JitsiMeetViewDelegate.h in Headers */,
 				0BD906EA1EC0C00300C8C18E /* JitsiMeet.h in Headers */,
-				DE81A2D42316AC4D00AE1940 /* JitsiMeetLogger.h in Headers */,
 				3110C24324176734006D1202 /* MOAUserInfo.h in Headers */,
+				DE81A2D42316AC4D00AE1940 /* JitsiMeetLogger.h in Headers */,
 				DE65AACA2317FFCD00290BEC /* LogUtils.h in Headers */,
 				DEAD3226220C497000E93636 /* JitsiMeetConferenceOptions.h in Headers */,
 			);
