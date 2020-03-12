@@ -8,7 +8,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
  * development with webpack-dev-server.
  */
 const devServerProxyTarget
-    = process.env.WEBPACK_DEV_SERVER_PROXY_TARGET || 'https://alpha.jitsi.net';
+    = process.env.WEBPACK_DEV_SERVER_PROXY_TARGET || 'https://39.101.179.35';
 
 const analyzeBundle = process.argv.indexOf('--analyze-bundle') !== -1;
 
@@ -32,7 +32,7 @@ function getPerformanceHints(size) {
 // jitsi-meet such as app.bundle.js and external_api.js.
 const config = {
     devServer: {
-        https: true,
+        https: false,
         inline: true,
         proxy: {
             '/': {

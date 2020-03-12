@@ -86,6 +86,11 @@ export function showErrorNotification(props: Object) {
  * }}
  */
 export function showNotification(props: Object = {}, timeout: ?number) {
+    //@todo moa added start
+    if (props.descriptionKey == 'notify.grantedTo') {
+        return undefined;
+    }
+    //@todo moa added end
     return {
         type: SHOW_NOTIFICATION,
         props,

@@ -8,8 +8,10 @@ import { connect } from '../../base/redux';
 import { AbstractInviteButton } from '../../base/toolbox';
 import type { AbstractButtonProps } from '../../base/toolbox';
 
-import { getAppProp } from '../../base/app';
+// import { getAppProp } from '../../base/app';
 import { enterInvite } from '../functions';
+
+import { getFeatureFlag, INVITE_ENABLED } from '../../base/flags';
 
 /**
  * The type of the React {@code Component} props of {@link InviteButton}.
@@ -47,7 +49,6 @@ class InviteButton extends AbstractInviteButton<Props, *> {
      * @returns {void}
      */
     _handleClick() {
-        console.log('handle click');
         this.props.dispatch(enterInvite());
     }
 
@@ -57,8 +58,9 @@ class InviteButton extends AbstractInviteButton<Props, *> {
 }
 
 function _mapStateToProps(state): Object {
+    const inviteEnable = getFeatureFlag(state, INVITE_ENABLED, true)
     return {
-        _enabled: true//Boolean(getAppProp(state, 'subject')=='group')
+        _enabled: inviteEnable
     };
 }
 

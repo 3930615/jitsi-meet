@@ -18,8 +18,9 @@ export default {
      * rendered.
      */
     container: {
-        ...StyleSheet.absoluteFillObject,
-        backgroundColor: ColorPalette.black
+        // ...StyleSheet.absoluteFillObject,
+        // backgroundColor: ColorPalette.black
+        display: 'none' //@todo moa modifty
     },
 
     loadingOverlayText: {

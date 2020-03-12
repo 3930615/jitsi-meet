@@ -75,7 +75,9 @@ function _mapStateToProps(state) {
     return {
         _showParticipantCount: participantCount > 2,
         _subject: getConferenceName(state),
-        _visible: isToolboxVisible(state)
+        _visible: false //@todo moa modifty
+
+        // _visible: isToolboxVisible(state)
     };
 }
 

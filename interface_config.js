@@ -9,29 +9,29 @@ var interfaceConfig = {
      * Whether or not the blurred video background for large video should be
      * displayed on browsers that can support it.
      */
-    DISABLE_VIDEO_BACKGROUND: false,
+    DISABLE_VIDEO_BACKGROUND: true,
 
     INITIAL_TOOLBAR_TIMEOUT: 20000,
     TOOLBAR_TIMEOUT: 4000,
     TOOLBAR_ALWAYS_VISIBLE: false,
-    DEFAULT_REMOTE_DISPLAY_NAME: 'Fellow Jitster',
+    DEFAULT_REMOTE_DISPLAY_NAME: '',
     DEFAULT_LOCAL_DISPLAY_NAME: 'me',
-    SHOW_JITSI_WATERMARK: true,
+    SHOW_JITSI_WATERMARK: false,
     JITSI_WATERMARK_LINK: 'https://jitsi.org',
 
     // if watermark is disabled by default, it can be shown only for guests
-    SHOW_WATERMARK_FOR_GUESTS: true,
+    SHOW_WATERMARK_FOR_GUESTS: false,
     SHOW_BRAND_WATERMARK: false,
     BRAND_WATERMARK_LINK: '',
     SHOW_POWERED_BY: false,
     SHOW_DEEP_LINKING_IMAGE: false,
-    GENERATE_ROOMNAMES_ON_WELCOME_PAGE: true,
-    DISPLAY_WELCOME_PAGE_CONTENT: true,
+    GENERATE_ROOMNAMES_ON_WELCOME_PAGE: false,
+    DISPLAY_WELCOME_PAGE_CONTENT: false,
     DISPLAY_WELCOME_PAGE_TOOLBAR_ADDITIONAL_CONTENT: false,
-    APP_NAME: 'Jitsi Meet',
-    NATIVE_APP_NAME: 'Jitsi Meet',
-    PROVIDER_NAME: 'Jitsi',
-    LANG_DETECTION: false, // Allow i18n to detect the system language
+    APP_NAME: 'OMA Meet',
+    NATIVE_APP_NAME: 'OMA Meet',
+    PROVIDER_NAME: 'OMA',
+    LANG_DETECTION: true, // Allow i18n to detect the system language
     INVITATION_POWERED_BY: true,
 
     /**
@@ -46,15 +46,22 @@ var interfaceConfig = {
      * enabled. Also, the "profile" button will not display for user's with a
      * jwt.
      */
+    // TOOLBAR_BUTTONS: [
+    //     'microphone', 'camera', 'closedcaptions', 'desktop', 'fullscreen',
+    //     'fodeviceselection', 'hangup', 'profile', 'info', 'chat', 'recording',
+    //     'livestreaming', 'etherpad', 'sharedvideo', 'settings', 'raisehand',
+    //     'videoquality', 'filmstrip', 'invite', 'feedback', 'stats', 'shortcuts',
+    //     'tileview', 'videobackgroundblur', 'download', 'help', 'mute-everyone'
+    // ],
     TOOLBAR_BUTTONS: [
         'microphone', 'camera', 'closedcaptions', 'desktop', 'fullscreen',
-        'fodeviceselection', 'hangup', 'profile', 'info', 'chat', 'recording',
-        'livestreaming', 'etherpad', 'sharedvideo', 'settings', 'raisehand',
-        'videoquality', 'filmstrip', 'invite', 'feedback', 'stats', 'shortcuts',
-        'tileview', 'videobackgroundblur', 'download', 'help', 'mute-everyone'
+        'fodeviceselection', 'hangup', 'profile', 'recording',
+        'livestreaming', 'etherpad', 'videoquality', 'filmstrip', 'invite',
+        'tileview', 'mute-everyone'
     ],
 
-    SETTINGS_SECTIONS: [ 'devices', 'language', 'moderator', 'profile', 'calendar' ],
+    // SETTINGS_SECTIONS: [ 'devices', 'language', 'moderator', 'profile', 'calendar' ],
+    SETTINGS_SECTIONS: [ 'devices', 'language', 'moderator', 'profile'],
 
     // Determines how the video would fit the screen. 'both' would fit the whole
     // screen, 'height' would fit the original video height to the height of the
@@ -201,10 +208,10 @@ var interfaceConfig = {
     DISABLE_JOIN_LEAVE_NOTIFICATIONS: false,
 
     /**
-    * Decides whether the chrome extension banner should be rendered on the landing page and during the meeting.
-    * If this is set to false, the banner will not be rendered at all. If set to true, the check for extension(s)
-    * being already installed is done before rendering.
-    */
+     * Decides whether the chrome extension banner should be rendered on the landing page and during the meeting.
+     * If this is set to false, the banner will not be rendered at all. If set to true, the check for extension(s)
+     * being already installed is done before rendering.
+     */
     SHOW_CHROME_EXTENSION_BANNER: false
 
     /**
@@ -245,7 +252,7 @@ var interfaceConfig = {
      INDICATOR_FONT_SIZES
      MOBILE_DYNAMIC_LINK
      PHONE_NUMBER_REGEX
-    */
+     */
 };
 
 /* eslint-enable no-unused-vars, no-var, max-len */
