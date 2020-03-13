@@ -20,6 +20,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
@@ -223,5 +225,10 @@ public class JitsiMeetActivity extends FragmentActivity
     @Override
     public void onConferenceWillJoin(Map<String, Object> data) {
         JitsiMeetLogger.i("Conference will join: " + data);
+    }
+
+    @Override
+    public void enterInvite(Map<String, Object> data) {
+        Log.d(TAG, "new member join: " + data);
     }
 }

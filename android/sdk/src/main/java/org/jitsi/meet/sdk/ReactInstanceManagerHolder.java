@@ -222,14 +222,6 @@ class ReactInstanceManagerHolder {
                     }
                 }));
 
-        try {
-            Class<?> googlePackageClass = Class.forName("co.apptailor.googlesignin.RNGoogleSigninPackage");
-            Constructor constructor = googlePackageClass.getConstructor();
-            packages.add((ReactPackage)constructor.newInstance());
-        } catch (Exception e) {
-            // Ignore any error, the module is not compiled when LIBRE_BUILD is enabled.
-        }
-
         // Use the Hermes JavaScript engine.
         HermesExecutorFactory jsFactory = new HermesExecutorFactory();
 
