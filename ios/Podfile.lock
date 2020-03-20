@@ -1,10 +1,5 @@
 PODS:
   - Amplitude-iOS (4.0.4)
-  - AppAuth (1.3.0):
-    - AppAuth/Core (= 1.3.0)
-    - AppAuth/ExternalUserAgent (= 1.3.0)
-  - AppAuth/Core (1.3.0)
-  - AppAuth/ExternalUserAgent (1.3.0)
   - boost-for-react-native (1.63.0)
   - BVLinearGradient (2.5.6):
     - React
@@ -38,10 +33,6 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - GoogleSignIn (5.0.2):
-    - AppAuth (~> 1.2)
-    - GTMAppAuth (~> 1.0)
-    - GTMSessionFetcher/Core (~> 1.1)
   - GoogleUtilities (5.5.0):
     - GoogleUtilities/AppDelegateSwizzler (= 5.5.0)
     - GoogleUtilities/Environment (= 5.5.0)
@@ -73,14 +64,6 @@ PODS:
   - GoogleUtilities/SwizzlerTestHelpers (5.5.0)
   - GoogleUtilities/UserDefaults (5.5.0):
     - GoogleUtilities/Logger
-  - GTMAppAuth (1.0.0):
-    - AppAuth/Core (~> 1.0)
-    - GTMSessionFetcher (~> 1.1)
-  - GTMSessionFetcher (1.3.1):
-    - GTMSessionFetcher/Full (= 1.3.1)
-  - GTMSessionFetcher/Core (1.3.1)
-  - GTMSessionFetcher/Full (1.3.1):
-    - GTMSessionFetcher/Core (= 1.3.1)
   - RCTRequired (0.61.5-jitsi.1)
   - RCTTypeSafety (0.61.5-jitsi.1):
     - FBLazyVector (= 0.61.5-jitsi.1)
@@ -312,9 +295,6 @@ PODS:
     - ReactCommon/turbomodule/core (= 0.61.5-jitsi.1)
   - RNCAsyncStorage (1.3.4):
     - React
-  - RNGoogleSignin (3.0.1):
-    - GoogleSignIn (~> 5.0.0)
-    - React
   - RNSound (0.11.0):
     - React
     - RNSound/Core (= 0.11.0)
@@ -367,7 +347,6 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/turbomodule (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
-  - "RNGoogleSignin (from `../node_modules/@react-native-community/google-signin`)"
   - RNSound (from `../node_modules/react-native-sound`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNWatch (from `../node_modules/react-native-watch-connectivity`)
@@ -376,14 +355,10 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Amplitude-iOS
-    - AppAuth
     - boost-for-react-native
     - CocoaLumberjack
     - Fabric
     - FirebaseAnalyticsInterop
-    - GoogleSignIn
-    - GTMAppAuth
-    - GTMSessionFetcher
 
 EXTERNAL SOURCES:
   BVLinearGradient:
@@ -456,8 +431,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-community/async-storage"
-  RNGoogleSignin:
-    :path: "../node_modules/@react-native-community/google-signin"
   RNSound:
     :path: "../node_modules/react-native-sound"
   RNSVG:
@@ -469,7 +442,6 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Amplitude-iOS: 2ad4d7270c99186236c1272a3a9425463b1ae1a7
-  AppAuth: 73574f3013a1e65b9601a3ddc8b3158cce68c09d
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
   CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
@@ -482,10 +454,7 @@ SPEC CHECKSUMS:
   FirebaseDynamicLinks: 54cfb6f7affc1f73fd4ca9fee2d88b86b93e7374
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
-  GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GoogleUtilities: 6481e6318c5fcabaaa8513ef8120f329055d7c10
-  GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
-  GTMSessionFetcher: cea130bbfe5a7edc8d06d3f0d17288c32ffe9925
   RCTRequired: f63dd90a89a60602acdd44c42e5d2645ca60ab79
   RCTTypeSafety: 24a3c6d55684046ed550b1d0ef083a9bf71c8bd4
   React: 71c5a51135f291c3b32c0b558e167b858ae50e84
@@ -512,12 +481,11 @@ SPEC CHECKSUMS:
   React-RCTVibration: a1bcfcdc0b5a73a1b0829a34cee22bd0e95bacba
   ReactCommon: 675681aba4fecff5acbc0e440530cc422103c610
   RNCAsyncStorage: 8e31405a9f12fbf42c2bb330e4560bfd79c18323
-  RNGoogleSignin: 39336070b35fc4cea6a98cf111e00480317be0ae
   RNSound: c980916b596cc15c8dcd2f6ecd3b13c4881dbe20
   RNSVG: aac12785382e8fd4f28d072fe640612e34914631
   RNWatch: 09738b339eceb66e4d80a2371633ca5fb380fa42
   Yoga: 7b4209fda2441f99d54dd6cf4c82b094409bb68f
 
-PODFILE CHECKSUM: dffe6fd93f6d21c581c83a1a5bf98ef7f2f6601e
+PODFILE CHECKSUM: 8294a752716da321929244737d8abd6c82b9c6be
 
 COCOAPODS: 1.9.1

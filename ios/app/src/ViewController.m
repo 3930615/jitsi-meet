@@ -89,14 +89,16 @@
 }
 
 - (void)conferenceTerminated:(NSDictionary *)data {
+  NSLog(@"conferenceTerminated : %@", data);
     [self _onJitsiMeetViewDelegateEvent:@"CONFERENCE_TERMINATED" withData:data];
 }
 
 - (void)conferenceWillJoin:(NSDictionary *)data {
+  NSLog(@"conferenceWillJoin : %@", data);
     [self _onJitsiMeetViewDelegateEvent:@"CONFERENCE_WILL_JOIN" withData:data];
 }
 
-#if 0
+#if 1
 - (void)enterPictureInPicture:(NSDictionary *)data {
     [self _onJitsiMeetViewDelegateEvent:@"ENTER_PICTURE_IN_PICTURE" withData:data];
 }

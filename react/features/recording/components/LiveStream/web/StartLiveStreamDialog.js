@@ -9,7 +9,6 @@ import { connect } from '../../../../base/redux';
 
 import {
     GOOGLE_API_STATES,
-    GoogleSignInButton,
     loadGoogleAPI,
     requestAvailableYouTubeBroadcasts,
     requestLiveStreamsForYouTubeBroadcast,
@@ -268,68 +267,68 @@ class StartLiveStreamDialog
             selectedBoundStreamID
         } = this.state;
 
-        let googleContent, helpText;
+        let googleContent = ''; let helpText = '';
 
-        switch (this.props._googleAPIState) {
-        case GOOGLE_API_STATES.LOADED:
-            googleContent
-                = <GoogleSignInButton onClick = { this._onGoogleSignIn } />;
-            helpText = t('liveStreaming.signInCTA');
+        // switch (this.props._googleAPIState) {
+        // case GOOGLE_API_STATES.LOADED:
+        //     googleContent
+        //         = <GoogleSignInButton onClick = { this._onGoogleSignIn } />;
+        //     helpText = t('liveStreaming.signInCTA');
+        //
+        //     break;
+        //
+        // case GOOGLE_API_STATES.SIGNED_IN:
+        //     if (broadcasts) {
+        //         googleContent = (
+        //             <StreamKeyPicker
+        //                 broadcasts = { broadcasts }
+        //                 onBroadcastSelected
+        //                     = { this._onYouTubeBroadcastIDSelected }
+        //                 selectedBoundStreamID = { selectedBoundStreamID } />
+        //         );
+        //     } else {
+        //         googleContent = (
+        //             <Spinner
+        //                 isCompleting = { false }
+        //                 size = 'medium' />
+        //         );
+        //     }
+        //
+        //     /**
+        //      * FIXME: Ideally this help text would be one translation string
+        //      * that also accepts the anchor. This can be done using the Trans
+        //      * component of react-i18next but I couldn't get it working...
+        //      */
+        //     helpText = (
+        //         <div>
+        //             { `${t('liveStreaming.chooseCTA',
+        //                 { email: _googleProfileEmail })} ` }
+        //             <a onClick = { this._onRequestGoogleSignIn }>
+        //                 { t('liveStreaming.changeSignIn') }
+        //             </a>
+        //         </div>
+        //     );
+        //
+        //     break;
+        //
+        // case GOOGLE_API_STATES.NEEDS_LOADING:
+        // default:
+        //     googleContent = (
+        //         <Spinner
+        //             isCompleting = { false }
+        //             size = 'medium' />
+        //     );
+        //
+        //     break;
+        // }
 
-            break;
-
-        case GOOGLE_API_STATES.SIGNED_IN:
-            if (broadcasts) {
-                googleContent = (
-                    <StreamKeyPicker
-                        broadcasts = { broadcasts }
-                        onBroadcastSelected
-                            = { this._onYouTubeBroadcastIDSelected }
-                        selectedBoundStreamID = { selectedBoundStreamID } />
-                );
-            } else {
-                googleContent = (
-                    <Spinner
-                        isCompleting = { false }
-                        size = 'medium' />
-                );
-            }
-
-            /**
-             * FIXME: Ideally this help text would be one translation string
-             * that also accepts the anchor. This can be done using the Trans
-             * component of react-i18next but I couldn't get it working...
-             */
-            helpText = (
-                <div>
-                    { `${t('liveStreaming.chooseCTA',
-                        { email: _googleProfileEmail })} ` }
-                    <a onClick = { this._onRequestGoogleSignIn }>
-                        { t('liveStreaming.changeSignIn') }
-                    </a>
-                </div>
-            );
-
-            break;
-
-        case GOOGLE_API_STATES.NEEDS_LOADING:
-        default:
-            googleContent = (
-                <Spinner
-                    isCompleting = { false }
-                    size = 'medium' />
-            );
-
-            break;
-        }
-
-        if (this.state.errorType !== undefined) {
-            googleContent = (
-                <GoogleSignInButton
-                    onClick = { this._onRequestGoogleSignIn } />
-            );
-            helpText = this._getGoogleErrorMessageToDisplay();
-        }
+        // if (this.state.errorType !== undefined) {
+        //     googleContent = (
+        //         <GoogleSignInButton
+        //             onClick = { this._onRequestGoogleSignIn } />
+        //     );
+        //     helpText = this._getGoogleErrorMessageToDisplay();
+        // }
 
         return (
             <div className = 'google-panel'>

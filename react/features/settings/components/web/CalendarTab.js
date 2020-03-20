@@ -14,7 +14,7 @@ import {
     isCalendarEnabled,
     signIn
 } from '../../../calendar-sync';
-import { GoogleSignInButton } from '../../../google-api';
+// import { GoogleSignInButton } from '../../../google-api';
 
 import logger from '../../logger';
 
@@ -221,12 +221,6 @@ class CalendarTab extends Component<Props, State> {
                     { t('settings.calendar.about',
                         { appName: _appName || '' }) }
                 </p>
-                { _enableGoogleIntegration
-                    && <div className = 'calendar-tab-sign-in'>
-                        <GoogleSignInButton
-                            onClick = { this._onClickGoogle }
-                            text = { t('liveStreaming.signIn') } />
-                    </div> }
                 { _enableMicrosoftIntegration
                     && <div className = 'calendar-tab-sign-in'>
                         <MicrosoftSignInButton

@@ -58,13 +58,10 @@ MiddlewareRegistry.register(store => next => action => {
 
     switch (type) {
         //@todo moa added start
-        case PARTICIPANT_LEFT: {
+        case PARTICIPANT_LEFT:
+        case PARTICIPANT_JOINED: {
             const memsCount = getParticipantCount(store);
             sendEvent(store, type, {count: memsCount});
-            break;
-        }
-        case PARTICIPANT_JOINED: {
-            // sendEvent(store, type, {count: getParticipantCount(store)});
             break;
         }
         case HIDDEN_PARTICIPANT_JOINED:

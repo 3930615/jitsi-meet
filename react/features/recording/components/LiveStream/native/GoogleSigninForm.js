@@ -12,7 +12,7 @@ import {
     GOOGLE_API_STATES,
     GOOGLE_SCOPE_YOUTUBE,
     googleApi,
-    GoogleSignInButton,
+    //GoogleSignInButton,
     setGoogleAPIState
 } from '../../../../google-api';
 
@@ -136,10 +136,6 @@ class GoogleSigninForm extends Component<Props> {
                         { userInfo }
                     </Text>
                 </View>
-                <GoogleSignInButton
-                    onClick = { this._onGoogleButtonPress }
-                    signedIn = {
-                        googleAPIState === GOOGLE_API_STATES.SIGNED_IN } />
             </View>
         );
     }
@@ -233,12 +229,12 @@ class GoogleSigninForm extends Component<Props> {
  * }}
  */
 function _mapStateToProps(state: Object) {
-    const { googleAPIState, googleResponse } = state['features/google-api'];
+    // const { googleAPIState, googleResponse } = state['features/google-api'];
 
     return {
-        ..._abstractMapStateToProps(state),
-        googleAPIState,
-        googleResponse
+        ..._abstractMapStateToProps(state)
+        // googleAPIState,
+        // googleResponse
     };
 }
 

@@ -23,7 +23,7 @@
 #import "RCTBridgeWrapper.h"
 #import "ReactUtils.h"
 
-#import <RNGoogleSignin/RNGoogleSignin.h>
+//#import <RNGoogleSignin/RNGoogleSignin.h>
 #import <WebRTC/RTCLogging.h>
 
 
@@ -93,13 +93,13 @@
 //    if ([Dropbox application:app openURL:url options:options]) {
 //        return YES;
 //    }
-
+/*
     if ([RNGoogleSignin application:app
                             openURL:url
                             options:options]) {
         return YES;
     }
-
+*/
     if (_customUrlScheme == nil || ![_customUrlScheme isEqualToString:url.scheme]) {
         return NO;
     }
