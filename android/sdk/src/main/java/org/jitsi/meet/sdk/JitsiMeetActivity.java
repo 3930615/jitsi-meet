@@ -228,7 +228,17 @@ public class JitsiMeetActivity extends FragmentActivity
     }
 
     @Override
-    public void enterInvite(Map<String, Object> data) {
-        Log.d(TAG, "new member join: " + data);
+    public void onEnterInvite(Map<String, Object> data) {
+        JitsiMeetLogger.i("onEnterInvite : " + data);
+    }
+
+    @Override
+    public void onParticipantJoined(Map<String, Object> data) {
+        JitsiMeetLogger.i("onParticipantJoined : " + data);
+    }
+
+    @Override
+    public void onParticipantLeft(Map<String, Object> data) {
+        JitsiMeetLogger.i("onParticipantLeft : " + data);
     }
 }
