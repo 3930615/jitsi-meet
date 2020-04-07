@@ -76,9 +76,9 @@ class ReactInstanceManagerHolder {
                 new WiFiStatsModule(reactContext),
                 new org.jitsi.meet.sdk.net.NAT64AddrInfoModule(reactContext)));
 
-        if (AudioModeModule.useConnectionService()) {
+        /*if (AudioModeModule.useConnectionService()) {
             nativeModules.add(new RNConnectionService(reactContext));
-        }
+        }*/
 
         // Initialize the WebRTC module by hand, since we want to override some
         // initialization options.

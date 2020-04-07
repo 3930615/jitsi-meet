@@ -82,7 +82,8 @@ class AudioModeModule extends ReactContextBaseJavaModule {
     private static boolean useConnectionService_ = supportsConnectionService;
 
     static boolean useConnectionService() {
-        return supportsConnectionService && useConnectionService_;
+        //return supportsConnectionService && useConnectionService_;
+        return false;
     }
 
     private AudioDeviceHandlerInterface audioDeviceHandler;
@@ -206,9 +207,7 @@ class AudioModeModule extends ReactContextBaseJavaModule {
             audioDeviceHandler.stop();
         }
 
-        if (useConnectionService()) {
-            audioDeviceHandler = new AudioDeviceHandlerConnectionService();
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             audioDeviceHandler = new AudioDeviceHandlerGeneric();
         } else {
             audioDeviceHandler = new AudioDeviceHandlerLegacy();
